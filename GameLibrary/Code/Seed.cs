@@ -5,6 +5,8 @@ using System.Linq;
 using System.Text;
 using System.Reflection;
 
+using Faseway.GameLibrary.Logging;
+
 namespace Faseway.GameLibrary
 {
     /// <summary>
@@ -56,6 +58,9 @@ namespace Faseway.GameLibrary
         public static void Initialize()
         {
             if (Initialized) return;
+
+            // Log
+            Logger.Log("Initializing Game Library ({0}) on {1}", Version, Environment.OSVersion.Platform);
 
             Initialized = true;
         }
