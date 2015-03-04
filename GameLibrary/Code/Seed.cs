@@ -65,7 +65,11 @@ namespace Faseway.GameLibrary
         {
             if (Initialized) return;
 
-            // log
+            // initalize logger
+            Logger.Initialize();
+            Logger.AddLogger(LoggerType.File, "ERR_LOG", Logger.ERR_LOG);
+
+            // first log
             Logger.Log("Initializing Game Library ({0}) on {1}", Version, Environment.OSVersion.Platform);
 
             // set conditions
