@@ -59,8 +59,12 @@ namespace Faseway.GameLibrary
         {
             if (Initialized) return;
 
-            // Log
+            // log
             Logger.Log("Initializing Game Library ({0}) on {1}", Version, Environment.OSVersion.Platform);
+
+            // set conditions
+            SetConditions();
+            SetConditionsForDebug();
 
             Initialized = true;
         }
@@ -71,9 +75,9 @@ namespace Faseway.GameLibrary
         }
 
         [ConditionalAttribute("DEBUG")]
-        private static void SetDebugConditions()
+        private static void SetConditionsForDebug()
         {
-
+            Logger.Log("Initializing debug conditions ...");
         }
     }
 }
