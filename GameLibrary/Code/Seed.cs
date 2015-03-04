@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Reflection;
 
+using Faseway.GameLibrary.Components;
 using Faseway.GameLibrary.Logging;
 
 namespace Faseway.GameLibrary
@@ -43,6 +44,11 @@ namespace Faseway.GameLibrary
             }
         }
 
+        /// <summary>
+        /// Gets the <see cref="Faseway.GameLibrary.Components.ComponentManager"/>.
+        /// </summary>
+        public static ComponentManager Components { get; private set; }
+
         // Constructor
         /// <summary>
         /// Initializes the <see cref="Faseway.GameLibrary.Seed"/> class.
@@ -66,18 +72,24 @@ namespace Faseway.GameLibrary
             SetConditions();
             SetConditionsForDebug();
 
+            // init component manager
+            Components = new ComponentManager();
+
+            // install components
+            //Components.Install(new MemoryManager());
+
             Initialized = true;
         }
 
         private static void SetConditions()
         {
-
+            Logger.Log("Initializing conditions ...");
         }
 
         [ConditionalAttribute("DEBUG")]
         private static void SetConditionsForDebug()
         {
-            Logger.Log("Initializing debug conditions ...");
+            Logger.Log("Initializing conditions for debug ...");
         }
     }
 }

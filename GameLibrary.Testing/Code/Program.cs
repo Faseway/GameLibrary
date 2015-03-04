@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 
 using Faseway.GameLibrary;
+using Faseway.GameLibrary.Components;
 
 namespace Faseway.GameLibrary.Testing
 {
@@ -17,8 +18,13 @@ namespace Faseway.GameLibrary.Testing
             Console.WriteLine();
 
             Seed.Initialize();
+            Seed.Components.Install(new TestComp());
 
             Console.Read();
         }
+    }
+
+    class TestComp : IComponent
+    {
     }
 }

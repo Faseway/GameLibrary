@@ -39,6 +39,9 @@
     <StartupObject />
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Components\ComponentManager.cs" />
+    <Compile Include="Components\IComponent.cs" />
+    <Compile Include="Components\MissingComponentException.cs" />
     <Compile Include="Copyright.cs" />
     <Compile Include="Facts.cs" />
     <Compile Include="Logging\Logger.cs" />
@@ -47,6 +50,10 @@
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Game\" />
+    <Folder Include="Math\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
