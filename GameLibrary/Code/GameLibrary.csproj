@@ -8,7 +8,7 @@
     <ProjectGuid>{D72892AD-A062-430D-851B-624FE5BC4AAC}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>GameLibrary</RootNamespace>
+    <RootNamespace>Faseway.GameLibrary</RootNamespace>
     <AssemblyName>GameLibrary</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <TargetFrameworkProfile>
@@ -39,6 +39,7 @@
     <StartupObject />
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Facts.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
