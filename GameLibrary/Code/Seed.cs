@@ -6,6 +6,7 @@ using System.Text;
 using System.Reflection;
 
 using Faseway.GameLibrary.Components;
+using Faseway.GameLibrary.Content;
 using Faseway.GameLibrary.Logging;
 
 namespace Faseway.GameLibrary
@@ -71,6 +72,9 @@ namespace Faseway.GameLibrary
 
             // first log
             Logger.Log("Initializing Game Library ({0}) on {1}", Version, Environment.OSVersion.Platform);
+
+            // init resource system
+            ResourceSystem.Initialize();
 
             // set conditions
             SetConditions();

@@ -42,6 +42,7 @@
     <Compile Include="Components\ComponentManager.cs" />
     <Compile Include="Components\IComponent.cs" />
     <Compile Include="Components\MissingComponentException.cs" />
+    <Compile Include="Content\ResourceSystem.cs" />
     <Compile Include="Copyright.cs" />
     <Compile Include="Facts.cs" />
     <Compile Include="Logging\ConsoleLogger.cs" />
@@ -50,6 +51,8 @@
     <Compile Include="Logging\Logger.cs" />
     <Compile Include="Logging\LoggerType.cs" />
     <Compile Include="Logging\LogLevel.cs" />
+    <Compile Include="MsgBox.cs" />
+    <Compile Include="MsgBoxIcon.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Scripting\CommandRestriction.cs" />
     <Compile Include="Scripting\CommandScript.cs" />
@@ -57,11 +60,11 @@
     <Compile Include="Scripting\Script.cs" />
     <Compile Include="Scripting\ScriptCompileException.cs" />
     <Compile Include="Scripting\ScriptCompiler.cs" />
-    <None Include="Scripting\ScriptDummy.script" />
     <Compile Include="Seed.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.Windows.Forms" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Game\" />

@@ -5,6 +5,7 @@ using System.Text;
 
 using Faseway.GameLibrary;
 using Faseway.GameLibrary.Components;
+using Faseway.GameLibrary.Content;
 using Faseway.GameLibrary.Logging;
 using Faseway.GameLibrary.Scripting;
 
