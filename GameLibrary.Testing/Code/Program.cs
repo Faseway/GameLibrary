@@ -6,6 +6,7 @@ using System.Text;
 using Faseway.GameLibrary;
 using Faseway.GameLibrary.Components;
 using Faseway.GameLibrary.Content;
+using Faseway.GameLibrary.Game;
 using Faseway.GameLibrary.Logging;
 using Faseway.GameLibrary.Scripting;
 
@@ -30,6 +31,8 @@ namespace Faseway.GameLibrary.Testing
             Logger.Log("Compiled {0} scripts", Seed.Components.GetAndRequire<ScriptCompiler>().CompiledCount);
 
             Seed.Components.GetAndRequire<ScriptCompiler>().GetCompiled("Hello").ConvertTo<CommandScript>().PushActions(null, null);
+
+            new Score().Save();
 
             Console.Read();
         }

@@ -45,6 +45,7 @@
     <Compile Include="Content\ResourceSystem.cs" />
     <Compile Include="Copyright.cs" />
     <Compile Include="Facts.cs" />
+    <Compile Include="Game\Score.cs" />
     <Compile Include="Logging\ConsoleLogger.cs" />
     <Compile Include="Logging\FileLogger.cs" />
     <Compile Include="Logging\ILogger.cs" />
@@ -65,9 +66,10 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.XML" />
+    <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Game\" />
     <Folder Include="Localization\" />
     <Folder Include="Math\" />
   </ItemGroup>
