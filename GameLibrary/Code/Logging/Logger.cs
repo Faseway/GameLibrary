@@ -165,6 +165,33 @@ namespace Faseway.GameLibrary.Logging
         }
 
         /// <summary>
+        /// Prints to the standard output stream.
+        /// </summary>
+        /// <param name="value">The value to print.</param>
+        public static void Print(string value)
+        {
+            lock (_locker)
+            {
+                // log to console
+                var logger = GetLogger("CONSOLE");
+                if (logger != null)
+                {
+                    logger.Log(value);
+                }
+            }
+        }
+
+        /// <summary>
+        /// Prints a formatted string to the standard output stream.
+        /// </summary>
+        /// <param name="format">A composite format string.</param>
+        /// <param name="args">The objects to print using format.</param>
+        public static void Print(string format, params object[] args)
+        {
+            Print(string.Format(format, args));
+        }
+
+        /// <summary>
         /// Writes to the standard output stream.
         /// </summary>
         /// <param name="value">The value to write.</param>

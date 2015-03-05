@@ -1,0 +1,32 @@
+// Faseway Game Library
+// Dummy Script v1.0
+
+public class Dummy : CommandScript
+{
+	public Dummy()
+	{
+		Icon = "Dummy";
+		Cursor = "Dummy";
+	}
+
+	public bool CheckTarget(object caller, object target)
+	{
+		if (caller == null || target == null)
+			return false;
+
+		return true;
+	}
+	
+	public void PushActions(object caller, object target)
+	{
+
+	}
+}
+
+// for test purposes
+// public enum Eno
+// {
+// 	E_NONE,
+// 	E_ONE,
+// 	E_TWO
+// }

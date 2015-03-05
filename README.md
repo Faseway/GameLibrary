@@ -2,9 +2,17 @@
 
 Open source game library for indie games.
 
+### Features
+
+- Components
+- Localization
+- Logging (file logging included)
+- Resource and file system
+- Scripts (dynamic runtime code)
+
 ### Version
 
-0.304.215 Pre-Alpha
+0.305.215 Pre-Alpha
 
 ### Tech
 

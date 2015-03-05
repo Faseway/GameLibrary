@@ -1,0 +1,25 @@
+// Faseway Game Library
+// Hello Script v1.0
+
+public class Hello : CommandScript
+{
+	public Hello()
+	{
+		Icon = "Hello";
+		Cursor = "Hello";
+	}
+
+	public bool CheckTarget(object caller, object target)
+	{
+		if (caller == null || target == null)
+			return false;
+
+		return true;
+	}
+	
+	public void PushActions(object caller, object target)
+	{
+		Logger.Print("Say hello");
+	}
+}
+
