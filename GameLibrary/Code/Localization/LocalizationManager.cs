@@ -9,6 +9,9 @@ using Faseway.GameLibrary.Content;
 
 namespace Faseway.GameLibrary.Localization
 {
+    /// <summary>
+    /// Represents a manager for the localization.
+    /// </summary>
     public class LocalizationManager : IComponent
     {
         // Properties
@@ -17,7 +20,7 @@ namespace Faseway.GameLibrary.Localization
         /// </summary>
         public Language CurrentLanguage { get; private set; }
         /// <summary>
-        /// Gets a <see cref="System.Collections.Generic.List"/> containing all <see cref="Faseway.GameLibrary.Localization.Language"/>s.
+        /// Gets a collection containing all <see cref="Faseway.GameLibrary.Localization.Language"/>s.
         /// </summary>
         public List<Language> Languages { get; private set; }
 
