@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GameLibrary", "GameLibrary\Code\GameLibrary.csproj", "{D72892AD-A062-430D-851B-624FE5BC4AAC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GameLibrary.Testing", "GameLibrary.Testing\Code\GameLibrary.Testing.csproj", "{F2FB363D-B70B-41FC-A0AA-14808CAAF65D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Testing", "Testing\Code\Testing.csproj", "{F2FB363D-B70B-41FC-A0AA-14808CAAF65D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
