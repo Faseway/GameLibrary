@@ -1,5 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <language version="1.0" languagecode="en" languagename="English">
+  <category name="commands">
+    <item name="Attack"><![CDATA[Attack]]></item>
+    <item name="Move"><![CDATA[Move]]></item>
+    <item name="Use"><![CDATA[Use]]></item>
+  </category>
+  
   <category name="common">
     <item name="welcome"><![CDATA[Welcome]]></item>
     <item name="security"><![CDATA[Security]]></item>
