@@ -32,6 +32,23 @@ namespace Faseway.GameLibrary.Localization
 
         // Methods
         /// <summary>
+        /// Changes the current <see cref="Faseway.GameLibrary.Localization.Language"/>.
+        /// </summary>
+        /// <param name="language">The <see cref="Faseway.GameLibrary.Localization.Language"/>.</param>
+        public void ChangeLanguage(string language)
+        {
+            Language currentLanguage = Languages.FirstOrDefault(f => f.Code == language);
+            if (currentLanguage == null)
+            {
+                Logger.Log("Language {0} does not exist. Could not change language.", language);
+                return;
+            }
+
+            CurrentLanguage = currentLanguage;
+            Logger.Log("Language changed to {0}", language);
+        }
+
+        /// <summary>
         /// Returns a localized value for the specified category and key.
         /// </summary>
         /// <param name="category">The category.</param>

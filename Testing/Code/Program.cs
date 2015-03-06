@@ -28,6 +28,7 @@ namespace Faseway.GameLibrary.Testing
             Seed.Components.Install(new LocalizationManager());
 
             Seed.Components.GetAndRequire<LocalizationManager>().LoadLanguages("Lang");
+            Seed.Components.GetAndRequire<LocalizationManager>().ChangeLanguage("en");
 
             Seed.Components.GetAndRequire<ScriptCompiler>().Compile("Scripts\\Dummy.script");
             Seed.Components.GetAndRequire<ScriptCompiler>().Compile("Scripts\\Hello.script");
@@ -35,6 +36,8 @@ namespace Faseway.GameLibrary.Testing
             Logger.Log("Compiled {0} scripts", Seed.Components.GetAndRequire<ScriptCompiler>().CompiledCount);
 
             Seed.Components.GetAndRequire<ScriptCompiler>().GetCompiled("Hello").ConvertTo<CommandScript>().PushActions(null, null);
+
+            Console.WriteLine(Seed.Components.GetAndRequire<LocalizationManager>().Get("common", "welcome"));
 
             Console.Read();
         }
