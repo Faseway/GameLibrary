@@ -45,6 +45,9 @@
     <Compile Include="Content\ResourceSystem.cs" />
     <Compile Include="Copyright.cs" />
     <Compile Include="Facts.cs" />
+    <Compile Include="Game\Entities\Entity.cs" />
+    <Compile Include="Game\Entities\EntityEnvironment.cs" />
+    <Compile Include="Game\Entities\EntityFactory.cs" />
     <Compile Include="Game\Score.cs" />
     <Compile Include="Localization\Category.cs" />
     <Compile Include="Localization\Language.cs" />

@@ -7,6 +7,7 @@ using Faseway.GameLibrary;
 using Faseway.GameLibrary.Components;
 using Faseway.GameLibrary.Content;
 using Faseway.GameLibrary.Game;
+using Faseway.GameLibrary.Game.Entities;
 using Faseway.GameLibrary.Logging;
 using Faseway.GameLibrary.Scripting;
 using Faseway.GameLibrary.Localization;
@@ -38,6 +39,14 @@ namespace Faseway.GameLibrary.Testing
             Seed.Components.GetAndRequire<ScriptCompiler>().GetCompiled("Hello").ConvertTo<CommandScript>().PushActions(null, null);
 
             Console.WriteLine(Seed.Components.GetAndRequire<LocalizationManager>().Get("common", "welcome"));
+
+            var environment = new EntityEnvironment();
+            var entity = environment.Factory.Create();
+            environment.Add(entity);
+            environment.Add(environment.Factory.Create());
+            environment.Add(environment.Factory.Create());
+            environment.Remove(entity);
+            environment.Clear();
 
             Console.Read();
         }
