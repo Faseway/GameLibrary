@@ -40,13 +40,23 @@ namespace Faseway.GameLibrary.Testing
 
             Console.WriteLine(Seed.Components.GetAndRequire<LocalizationManager>().Get("common", "welcome"));
 
-            var environment = new EntityEnvironment();
-            var entity = environment.Factory.Create();
-            environment.Add(entity);
-            environment.Add(environment.Factory.Create());
-            environment.Add(environment.Factory.Create());
-            environment.Remove(entity);
-            environment.Clear();
+            using (var game = new Game.Game())
+            {
+                game.Environment.Add(game.Environment.Factory.Create());
+                game.Environment.Add(game.Environment.Factory.Create());
+                game.Environment.Add(game.Environment.Factory.Create());
+
+                game.Campaign = new Game.Campaigns.Campaign();
+                game.Campaign.AddObjective("OBJ_EAT_TOAST");
+                game.Campaign.AddObjective("OBJ_HAVE_FUN");
+                game.Campaign.AddObjective("OBJ_KILL_RUFFY");
+
+                game.Campaign.SetObjectiveAccomplished("OBJ_KILL_RUFFY", true);
+
+                Logger.Log("Campaign objectives : {0} (Accomplished : {1} Remaining : {2})", game.Campaign.ObjectiveNum, game.Campaign.ObjectivesAccomplishedNum, game.Campaign.ObjectivesNotAccomplishedNum);
+
+                game.Run();
+            }
 
             Console.Read();
         }
