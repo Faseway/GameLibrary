@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
+using Faseway.GameLibrary.Logging;
+
 namespace Faseway.GameLibrary.Game.Campaigns
 {
     public class Campaign
@@ -37,6 +39,8 @@ namespace Faseway.GameLibrary.Game.Campaigns
         public Campaign()
         {
             _objectives = new List<Objective>();
+
+            ObjectiveChanged += (s, e) => { Logger.Log("Objective {0} accomplished state changed to {1}", e.Name, e.Accomplished); };
         }
 
         // Methods
@@ -50,6 +54,12 @@ namespace Faseway.GameLibrary.Game.Campaigns
             if (!HasObjective(name))
             {
                 _objectives.Add(new Objective(name, state));
+
+                Logger.Log("Objective {0} has been added", name);
+            }
+            else
+            {
+                Logger.Log("Objective {0} has already been added", name);
             }
         }
 
@@ -104,6 +114,8 @@ namespace Faseway.GameLibrary.Game.Campaigns
         public void RemoveObjective(string name)
         {
             _objectives.Remove(_objectives.Find(obj => obj.Name == name));
+
+            Logger.Log("Objective {0} has been removed", name);
         }
 
     }
