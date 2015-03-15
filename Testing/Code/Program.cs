@@ -14,6 +14,7 @@ using Faseway.GameLibrary.Serialization;
 using Faseway.GameLibrary.Localization;
 using Faseway.GameLibrary.UI;
 using Faseway.GameLibrary.UI.Widgets;
+using System.IO;
 
 namespace Faseway.GameLibrary.Testing
 {
@@ -67,8 +68,8 @@ namespace Faseway.GameLibrary.Testing
             widget.Widgets.Add(new Text());
             container.Widgets.Add(widget);
 
-            var serializer = new UiSerializer();
-            serializer.Serialize(container, null);
+            var serializer = new GooeySerializer();
+            serializer.Serialize(container, File.Open("Data//UI//Dummy.xml", FileMode.Create, FileAccess.Write));
 
             Console.Read();
         }

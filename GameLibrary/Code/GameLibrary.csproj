@@ -77,7 +77,7 @@
     <Compile Include="Scripting\ScriptCompiler.cs" />
     <Compile Include="Seed.cs" />
     <Compile Include="Serialization\ISerializer.cs" />
-    <Compile Include="Serialization\UiSerializer.cs" />
+    <Compile Include="Serialization\GooeySerializer.cs" />
     <Compile Include="UI\Base\IWidgetContainer.cs" />
     <Compile Include="UI\Widget.cs" />
     <Compile Include="UI\WidgetContainer.cs" />

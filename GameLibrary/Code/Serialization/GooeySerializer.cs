@@ -2,6 +2,7 @@
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Xml;
 using System.Xml.Linq;
 
 using Faseway.GameLibrary.Logging;
@@ -9,12 +10,17 @@ using Faseway.GameLibrary.UI;
 
 namespace Faseway.GameLibrary.Serialization
 {
-    public class UiSerializer : ISerializer
+    /// <summary>
+    /// Provides a serializer for seralizing graphical user interface elements.
+    /// </summary>
+    public class GooeySerializer : ISerializer
     {
         // Constructor
-        public UiSerializer()
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Faseway.GameLibrary.Serialization.GooeySerializer"/> class.
+        /// </summary>
+        public GooeySerializer()
         {
-
         }
 
         // Methods
@@ -38,9 +44,22 @@ namespace Faseway.GameLibrary.Serialization
                     document.Root.Add(element);
                 }
 
-                document.Save("dummy.xml");
+                var text = document.ToString(SaveOptions.None);
+                var buffer = Encoding.Default.GetBytes(text);
+                
+                stream.Write(buffer, 0, buffer.Length);
+                stream.Flush();
+                stream.Close();
+                stream.Dispose();
 
-                Logger.Log("Serializing {0} done ...", instance.GetType());
+                if (stream.GetType() == typeof(FileStream))
+                {
+                    Logger.Log("Serializing {0} to {1} done ...", instance.GetType(), ((FileStream)stream).Name);
+                }
+                else
+                {
+                    Logger.Log("Serializing {0} done ...", instance.GetType());
+                }
             }
         }
 
@@ -52,6 +71,11 @@ namespace Faseway.GameLibrary.Serialization
 
     public static class UiSerializationExtension
     {
+        /// <summary>
+        /// Returns a serialized version of a widget.
+        /// </summary>
+        /// <param name="widget">The widget.</param>
+        /// <returns>An <see cref="System.Xml.Linq.XElement"/>.</returns>
         public static XElement GetSerializedData(this Widget widget)
         {
             var element = new XElement("widget", new XAttribute("type", widget.GetType().Name));
