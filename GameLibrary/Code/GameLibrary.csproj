@@ -44,6 +44,7 @@
     <Compile Include="Components\MissingComponentException.cs" />
     <Compile Include="Content\ResourceSystem.cs" />
     <Compile Include="Copyright.cs" />
+    <Compile Include="Extra\Extensions.cs" />
     <Compile Include="Facts.cs" />
     <Compile Include="Game\Campaigns\Campaign.cs" />
     <Compile Include="Game\Campaigns\Objective.cs" />
@@ -52,6 +53,9 @@
     <Compile Include="Game\Entities\EntityEnvironment.cs" />
     <Compile Include="Game\Entities\EntityFactory.cs" />
     <Compile Include="Game\Game.cs" />
+    <Compile Include="Game\Handlers\IDrawHandler.cs" />
+    <Compile Include="Game\Handlers\IGameHandler.cs" />
+    <Compile Include="Game\Handlers\IUpdateHandler.cs" />
     <Compile Include="Game\Score.cs" />
     <Compile Include="Localization\Category.cs" />
     <Compile Include="Localization\Language.cs" />
@@ -72,6 +76,14 @@
     <Compile Include="Scripting\ScriptCompileException.cs" />
     <Compile Include="Scripting\ScriptCompiler.cs" />
     <Compile Include="Seed.cs" />
+    <Compile Include="Serialization\ISerializer.cs" />
+    <Compile Include="Serialization\UiSerializer.cs" />
+    <Compile Include="UI\Base\IWidgetContainer.cs" />
+    <Compile Include="UI\Widget.cs" />
+    <Compile Include="UI\WidgetContainer.cs" />
+    <Compile Include="UI\Widgets\Box.cs" />
+    <Compile Include="UI\Widgets\Frame.cs" />
+    <Compile Include="UI\Widgets\Text.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -81,6 +93,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Math\" />
+    <Folder Include="UI\Events\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

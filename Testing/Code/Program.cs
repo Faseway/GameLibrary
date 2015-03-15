@@ -10,7 +10,10 @@ using Faseway.GameLibrary.Game;
 using Faseway.GameLibrary.Game.Entities;
 using Faseway.GameLibrary.Logging;
 using Faseway.GameLibrary.Scripting;
+using Faseway.GameLibrary.Serialization;
 using Faseway.GameLibrary.Localization;
+using Faseway.GameLibrary.UI;
+using Faseway.GameLibrary.UI.Widgets;
 
 namespace Faseway.GameLibrary.Testing
 {
@@ -57,6 +60,15 @@ namespace Faseway.GameLibrary.Testing
 
                 game.Run();
             }
+
+            var container = new WidgetContainer();
+            var widget = new Frame();
+            widget.Widgets.Add(new Box());
+            widget.Widgets.Add(new Text());
+            container.Widgets.Add(widget);
+
+            var serializer = new UiSerializer();
+            serializer.Serialize(container, null);
 
             Console.Read();
         }
