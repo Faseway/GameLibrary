@@ -5,7 +5,13 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GameLibrary", "GameLibrary\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Testing", "Testing\Code\Testing.csproj", "{F2FB363D-B70B-41FC-A0AA-14808CAAF65D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestingXna", "TestingXna\Code\TestingXna.csproj", "{062C3F4A-E2C1-4CE5-BAE4-313E1880DB30}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WindowsGame", "WindowsGame\Code\WindowsGame.csproj", "{AF4691E5-DD27-4941-88E5-C89799628568}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WindowsGameContent", "WindowsGame\Content\WindowsGameContent.contentproj", "{8D31FBFE-546D-4595-ADEC-61264E161F08}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Library", "Library", "{5685EABB-61EC-4D94-8A37-AE8C7902A5BC}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Test", "Test", "{6699CE6C-669C-489F-85C6-917E0EB91719}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,12 +27,20 @@ Global
 		{F2FB363D-B70B-41FC-A0AA-14808CAAF65D}.Debug|x86.Build.0 = Debug|x86
 		{F2FB363D-B70B-41FC-A0AA-14808CAAF65D}.Release|x86.ActiveCfg = Release|x86
 		{F2FB363D-B70B-41FC-A0AA-14808CAAF65D}.Release|x86.Build.0 = Release|x86
-		{062C3F4A-E2C1-4CE5-BAE4-313E1880DB30}.Debug|x86.ActiveCfg = Debug|x86
-		{062C3F4A-E2C1-4CE5-BAE4-313E1880DB30}.Debug|x86.Build.0 = Debug|x86
-		{062C3F4A-E2C1-4CE5-BAE4-313E1880DB30}.Release|x86.ActiveCfg = Release|x86
-		{062C3F4A-E2C1-4CE5-BAE4-313E1880DB30}.Release|x86.Build.0 = Release|x86
+		{AF4691E5-DD27-4941-88E5-C89799628568}.Debug|x86.ActiveCfg = Debug|x86
+		{AF4691E5-DD27-4941-88E5-C89799628568}.Debug|x86.Build.0 = Debug|x86
+		{AF4691E5-DD27-4941-88E5-C89799628568}.Release|x86.ActiveCfg = Release|x86
+		{AF4691E5-DD27-4941-88E5-C89799628568}.Release|x86.Build.0 = Release|x86
+		{8D31FBFE-546D-4595-ADEC-61264E161F08}.Debug|x86.ActiveCfg = Debug|x86
+		{8D31FBFE-546D-4595-ADEC-61264E161F08}.Release|x86.ActiveCfg = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{D72892AD-A062-430D-851B-624FE5BC4AAC} = {5685EABB-61EC-4D94-8A37-AE8C7902A5BC}
+		{F2FB363D-B70B-41FC-A0AA-14808CAAF65D} = {6699CE6C-669C-489F-85C6-917E0EB91719}
+		{AF4691E5-DD27-4941-88E5-C89799628568} = {6699CE6C-669C-489F-85C6-917E0EB91719}
+		{8D31FBFE-546D-4595-ADEC-61264E161F08} = {6699CE6C-669C-489F-85C6-917E0EB91719}
 	EndGlobalSection
 EndGlobal

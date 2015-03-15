@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-using Faseway.GameLibrary.Rendering;
 using Faseway.GameLibrary.UI.Base;
 
+using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace Faseway.GameLibrary.UI
@@ -19,7 +19,11 @@ namespace Faseway.GameLibrary.UI
         public List<Widget> Widgets { get; set; }
         public GraphicsDevice Graphics
         {
-            get { return Seed.Components.GetAndRequire<RenderingFactory>().Graphics; }
+            get { return Seed.Components.GetAndRequire<XnaReference>().Graphics; }
+        }
+        public ContentManager Content
+        {
+            get { return Seed.Components.GetAndRequire<XnaReference>().Content; }
         }
 
         // Constructor

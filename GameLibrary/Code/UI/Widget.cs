@@ -212,6 +212,7 @@ namespace Faseway.GameLibrary.UI
         public void LoadContent()
         {
             OnContentLoad();
+            Widgets.ForEach(widget => widget.LoadContent());
         }
 
         /// <summary>
