@@ -7,5 +7,10 @@ namespace Faseway.GameLibrary.UI.Widgets
 {
     public class Frame : Widget
     {
+        // Constructor
+        public Frame(WidgetContainer container)
+            : base(container)
+        {
+        }
     }
 }

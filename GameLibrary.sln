@@ -5,6 +5,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GameLibrary", "GameLibrary\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Testing", "Testing\Code\Testing.csproj", "{F2FB363D-B70B-41FC-A0AA-14808CAAF65D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestingXna", "TestingXna\Code\TestingXna.csproj", "{062C3F4A-E2C1-4CE5-BAE4-313E1880DB30}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x86 = Debug|x86
@@ -19,6 +21,10 @@ Global
 		{F2FB363D-B70B-41FC-A0AA-14808CAAF65D}.Debug|x86.Build.0 = Debug|x86
 		{F2FB363D-B70B-41FC-A0AA-14808CAAF65D}.Release|x86.ActiveCfg = Release|x86
 		{F2FB363D-B70B-41FC-A0AA-14808CAAF65D}.Release|x86.Build.0 = Release|x86
+		{062C3F4A-E2C1-4CE5-BAE4-313E1880DB30}.Debug|x86.ActiveCfg = Debug|x86
+		{062C3F4A-E2C1-4CE5-BAE4-313E1880DB30}.Debug|x86.Build.0 = Debug|x86
+		{062C3F4A-E2C1-4CE5-BAE4-313E1880DB30}.Release|x86.ActiveCfg = Release|x86
+		{062C3F4A-E2C1-4CE5-BAE4-313E1880DB30}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

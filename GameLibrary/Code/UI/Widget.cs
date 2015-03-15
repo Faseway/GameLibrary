@@ -8,6 +8,8 @@ using Faseway.GameLibrary.Game.Handlers;
 using Faseway.GameLibrary.UI;
 using Faseway.GameLibrary.UI.Base;
 
+using Microsoft.Xna.Framework;
+
 namespace Faseway.GameLibrary.UI
 {
     /// <summary>
@@ -19,6 +21,10 @@ namespace Faseway.GameLibrary.UI
         private bool _focused;
         private bool _enabled;
         private bool _visible;
+        private bool _dirty;
+
+        private float _width;
+        private float _height;
 
         // Properties
         /// <summary>
@@ -81,7 +87,7 @@ namespace Faseway.GameLibrary.UI
         /// <summary>
         /// Gets a value indicating whether the widget has children.
         /// </summary>
-        public bool HasChildren 
+        public bool HasChildren
         {
             get { return Widgets.Count > 0; }
         }
@@ -91,9 +97,56 @@ namespace Faseway.GameLibrary.UI
         /// </summary>
         public float Opacity { get; set; }
 
+        //public Rectangle Bounds
+        //{
+        //    get { return new Rectangle((int)ScreenPosition.X, (int)ScreenPosition.Y, Width, Height); }
+        //}
+        public float Width
+        {
+            get { return _width; }
+            set
+            {
+                _width = value;
+                _dirty = true;
+
+                //OnBoundsChanged();
+            }
+        }
+        public float Height
+        {
+            get { return _height; }
+            set
+            {
+                _height = value;
+                _dirty = true;
+
+                //OnBoundsChanged();
+            }
+        }
+        public Vector2 Position { get; set; }
+        //public Vector2 ScreenPosition
+        //{
+        //    get { return Container.ScreenPosition + Position; }
+        //}
+        public Vector2 Size
+        {
+            get
+            {
+                return new Vector2(Width, Height);
+            }
+            set
+            {
+                Width = value.X;
+                Height = value.Y;
+            }
+        }
+
+        public WidgetContainer Container { get; set; }
+
         // Events
         public event EventHandler Load;
         public event EventHandler Unload;
+        public event EventHandler ContentLoad;
 
         public event EventHandler GotFocus;
         public event EventHandler LostFocus;
@@ -108,8 +161,11 @@ namespace Faseway.GameLibrary.UI
         /// <summary>
         /// Initializes a new instance of the <see cref="Faseway.GameLibrary.UI.Widget"/> class.
         /// </summary>
-        public Widget()
+        public Widget(WidgetContainer container)
         {
+            Container = container;
+            Container.Widgets.Add(this);
+
             Enabled = true;
             Visible = true;
 
@@ -150,6 +206,15 @@ namespace Faseway.GameLibrary.UI
         }
 
         /// <summary>
+        /// LoadContent will be called once per game and is the place to load
+        /// all of your content.
+        /// </summary>
+        public void LoadContent()
+        {
+            OnContentLoad();
+        }
+
+        /// <summary>
         /// Updates the widget.
         /// </summary>
         public override void Update(float elapsed)
@@ -182,6 +247,11 @@ namespace Faseway.GameLibrary.UI
         protected virtual void OnUnload()
         {
             Unload.SafeInvoke(this, EventArgs.Empty);
+        }
+
+        protected virtual void OnContentLoad()
+        {
+            ContentLoad.SafeInvoke(this, EventArgs.Empty);
         }
 
         protected virtual void OnGotFocus()
