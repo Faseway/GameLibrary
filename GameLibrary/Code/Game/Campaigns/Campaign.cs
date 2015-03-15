@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
+using Faseway.GameLibrary.Extra;
 using Faseway.GameLibrary.Logging;
 
 namespace Faseway.GameLibrary.Game.Campaigns
@@ -94,7 +95,7 @@ namespace Faseway.GameLibrary.Game.Campaigns
             if (objective != null)
             {
                 objective.Accomplished = state;
-                if (ObjectiveChanged != null) ObjectiveChanged.Invoke(this, new ObjectiveChangedEventArgs(objective));
+                ObjectiveChanged.SafeInvoke(this, new ObjectiveChangedEventArgs(objective));
             }
         }
 
