@@ -8,11 +8,14 @@ Open source game library for indie games.
 - Localization
 - Logging (file logging included)
 - Resource and file system
+- Scene management
 - Scripts (dynamic runtime code)
+- Serialization
+- Gui (Gooey) system
 
 ### Version
 
-0.305.215 Pre-Alpha
+0.316.215 Pre-Alpha
 
 ### Tech
 
@@ -35,8 +38,6 @@ Base
 ```
 
 ### Development
-
-
 
 Want to contribute? Great! Do it!
 

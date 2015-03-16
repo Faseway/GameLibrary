@@ -56,6 +56,7 @@ namespace Faseway.GameLibrary.TestGame
                 Logger.Error("Fatal error");
                 MsgBox.Show(MsgBoxIcon.Error, "Fatal error", "Unhandled exception has been thrown");
             }
+            Logger.Error("------------------------------------------------");
         }
     }
 #endif
