@@ -36,6 +36,10 @@ namespace Faseway.GameLibrary.TestGame.Game
         {
             get { return Seed.Components.GetAndRequire<SceneManager>(); }
         }
+        public XnaReference Reference
+        {
+            get { return Seed.Components.GetAndRequire<XnaReference>(); }
+        }
 
         // Constructor
         public TestGame()
@@ -59,12 +63,15 @@ namespace Faseway.GameLibrary.TestGame.Game
 
             // install components
             Seed.Components.Install(new XnaReference());
-            Seed.Components.Install(new GameLoop());
             Seed.Components.Install(new SceneManager());
+            Seed.Components.Install(new GameLoop());
 
             // link
-            Seed.Components.GetAndRequire<XnaReference>().CreateContent(Content);
-            Seed.Components.GetAndRequire<XnaReference>().CreateGraphics(GraphicsDevice);
+            Reference.Link(Content);
+            Reference.Link(GraphicsDevice);
+
+            var reference = Reference.Get<GraphicsDevice>();
+            var reference2 = Reference.Get<GraphicsAdapter>();
 
             // install scenes
             SceneManager.Add(new TestScene());

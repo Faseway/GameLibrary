@@ -70,12 +70,13 @@
     <Compile Include="Logging\Logger.cs" />
     <Compile Include="Logging\LoggerType.cs" />
     <Compile Include="Logging\LogLevel.cs" />
+    <Compile Include="Components\MissingReferenceException.cs" />
     <Compile Include="MsgBox.cs" />
     <Compile Include="MsgBoxIcon.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UI\Events\PaintEventArgs.cs" />
     <Compile Include="UI\WidgetState.cs" />
-    <Compile Include="XnaReference.cs" />
+    <Compile Include="Components\XnaReference.cs" />
     <Compile Include="Scripting\CommandRestriction.cs" />
     <Compile Include="Scripting\CommandScript.cs" />
     <Compile Include="Scripting\Precompiled.cs" />

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
+using Faseway.GameLibrary.Components;
 using Faseway.GameLibrary.UI.Base;
 
 using Microsoft.Xna.Framework;
@@ -31,14 +32,14 @@ namespace Faseway.GameLibrary.UI
         /// </summary>
         public GraphicsDevice Graphics
         {
-            get { return Seed.Components.GetAndRequire<XnaReference>().Graphics; }
+            get { return Seed.Components.GetAndRequire<XnaReference>().GetAndRequire<GraphicsDevice>(); }
         }
         /// <summary>
         /// Gets the content manager.
         /// </summary>
         public ContentManager Content
         {
-            get { return Seed.Components.GetAndRequire<XnaReference>().Content; }
+            get { return Seed.Components.GetAndRequire<XnaReference>().GetAndRequire<ContentManager>(); }
         }
 
         // Constructor

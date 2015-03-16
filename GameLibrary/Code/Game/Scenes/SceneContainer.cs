@@ -6,6 +6,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 
+using Faseway.GameLibrary.Components;
 using Faseway.GameLibrary.Logging;
 
 namespace Faseway.GameLibrary.Game.Scenes
@@ -25,14 +26,14 @@ namespace Faseway.GameLibrary.Game.Scenes
         /// </summary>
         protected GraphicsDevice Graphics
         {
-            get { return Seed.Components.GetAndRequire<XnaReference>().Graphics; }
+            get { return Seed.Components.GetAndRequire<XnaReference>().GetAndRequire<GraphicsDevice>(); }
         }
         /// <summary>
         /// Gets the content manager.
         /// </summary>
         protected ContentManager Content
         {
-            get { return Seed.Components.GetAndRequire<XnaReference>().Content; }
+            get { return Seed.Components.GetAndRequire<XnaReference>().GetAndRequire<ContentManager>(); }
         }
 
         // Constructors
