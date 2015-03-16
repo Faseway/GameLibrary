@@ -59,6 +59,7 @@ namespace Faseway.GameLibrary.TestGame.Game
 
             // install components
             Seed.Components.Install(new XnaReference());
+            Seed.Components.Install(new GameLoop());
             Seed.Components.Install(new SceneManager());
 
             // link
@@ -110,6 +111,8 @@ namespace Faseway.GameLibrary.TestGame.Game
             }
 
             // TODO: Add your update logic here
+
+            Seed.Components.GetAndRequire<GameLoop>().Loop();
 
             SceneManager.Update(gameTime.ElapsedGameTime.Ticks);
 

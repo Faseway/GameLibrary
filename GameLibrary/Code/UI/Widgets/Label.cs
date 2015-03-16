@@ -12,6 +12,7 @@ namespace Faseway.GameLibrary.UI.Widgets
 
         // Properties
         public Color Color { get; set; }
+        public string Text { get; set; }
 
         // Constructor
         public Label(WidgetContainer container)
@@ -29,10 +30,13 @@ namespace Faseway.GameLibrary.UI.Widgets
 
         protected override void OnPaint()
         {
-            _spriteBatch.Begin();
-            _spriteBatch.DrawString(_spriteFont, "Test", Position, Color);
-            //_spriteBatch.DrawString(_spriteFont, "Test", Position, Color, 0, _spriteFont.MeasureString("Test") / 2, 1.0f, SpriteEffects.None, 0.5f);
-            _spriteBatch.End();
+            if (!string.IsNullOrEmpty(Text))
+            {
+                _spriteBatch.Begin();
+                _spriteBatch.DrawString(_spriteFont, Text, Position, Color);
+                //_spriteBatch.DrawString(_spriteFont, Text, Position, Color, 0, _spriteFont.MeasureString(Text) / 2, 1.0f, SpriteEffects.None, 0.5f);
+                _spriteBatch.End();
+            }
         }
     }
 }

@@ -36,6 +36,16 @@ namespace Faseway.GameLibrary.UI
         }
 
         // Methods
+        public Widget Get(int index)
+        {
+            return Widgets[index];
+        }
+
+        public T Get<T>(int index) where T : Widget
+        {
+            return (T)Convert.ChangeType(Widgets[index], typeof(T));
+        }
+
         /// <summary>
         /// Updates all widgets.
         /// </summary>

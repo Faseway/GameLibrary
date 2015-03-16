@@ -2,6 +2,10 @@
 using System.Linq;
 using System.Collections.Generic;
 
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Content;
+using Microsoft.Xna.Framework.Graphics;
+
 using Faseway.GameLibrary.Logging;
 
 namespace Faseway.GameLibrary.Game.Scenes
@@ -16,6 +20,13 @@ namespace Faseway.GameLibrary.Game.Scenes
         /// Gets a collection of all scenes.
         /// </summary>
         protected List<Scene> Scenes { get; private set; }
+        /// <summary>
+        /// Gets the graphics device.
+        /// </summary>
+        protected GraphicsDevice Graphics
+        {
+            get { return Seed.Components.GetAndRequire<XnaReference>().Graphics; }
+        }
 
         // Constructors
         /// <summary>

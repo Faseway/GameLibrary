@@ -30,28 +30,28 @@ namespace Faseway.GameLibrary.TestGame.Game.Scenes
         public override void LoadContent()
         {
             _container = new WidgetContainer();
-
+            
             new Box(_container)
             {
-                Position = new Vector2(5),
+                Position = new Vector2(Graphics.PresentationParameters.BackBufferWidth - 55, 5),
                 Size = new Vector2(50),
                 Color = Color.LightCoral
             };
             new Box(_container)
             {
-                Position = new Vector2(5, 60),
+                Position = new Vector2(Graphics.PresentationParameters.BackBufferWidth - 55, 60),
                 Size = new Vector2(50),
                 Color = Color.LightCoral
             };
             new Box(_container)
             {
-                Position = new Vector2(60, 5),
+                Position = new Vector2(Graphics.PresentationParameters.BackBufferWidth - 110, 5),
                 Size = new Vector2(50),
                 Color = Color.LightCoral
             };
             new Label(_container)
             {
-                Position = new Vector2(100, 100)
+                Position = new Vector2(5, 5)
             };
 
             _container.Widgets.ForEach(widget => widget.LoadContent());
@@ -62,6 +62,13 @@ namespace Faseway.GameLibrary.TestGame.Game.Scenes
         public override void Update(float elapsed)
         {
             _container.Update(elapsed);
+
+            _container.Get<Label>(3).Text = string.Format(
+                "Faseway Game Library\nVersion: {0}\nBuild: {1}\nFrameIndex: {2:000000}\nFrameRate: {3}",
+                Seed.Version,
+                Seed.BuildDate,
+                Seed.Components.GetAndRequire<GameLoop>().FrameIndex,
+                Seed.Components.GetAndRequire<GameLoop>().FramesPerSecond);
 
             base.Update(elapsed);
         }
