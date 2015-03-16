@@ -10,6 +10,17 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
 
+using Faseway.GameLibrary;
+using Faseway.GameLibrary.Components;
+using Faseway.GameLibrary.Content;
+using Faseway.GameLibrary.Game;
+using Faseway.GameLibrary.Game.Scenes;
+using Faseway.GameLibrary.Logging;
+using Faseway.GameLibrary.UI;
+using Faseway.GameLibrary.UI.Widgets;
+
+using Faseway.GameLibrary.TestGame.Game.Scenes;
+
 namespace Faseway.GameLibrary.TestGame.Game
 {
     /// <summary>
@@ -21,10 +32,16 @@ namespace Faseway.GameLibrary.TestGame.Game
 
         // Properties
         public GraphicsDeviceManager Graphics { get; private set; }
+        public SceneManager SceneManager
+        {
+            get { return Seed.Components.GetAndRequire<SceneManager>(); }
+        }
 
         // Constructor
         public TestGame()
         {
+            Logger.Log("Initializing TestGame ...");
+
             Graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
         }
@@ -39,6 +56,17 @@ namespace Faseway.GameLibrary.TestGame.Game
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
+
+            // install components
+            Seed.Components.Install(new XnaReference());
+            Seed.Components.Install(new SceneManager());
+
+            // link
+            Seed.Components.GetAndRequire<XnaReference>().CreateContent(Content);
+            Seed.Components.GetAndRequire<XnaReference>().CreateGraphics(GraphicsDevice);
+
+            // install scenes
+            SceneManager.Add(new TestScene());
 
             base.Initialize();
         }
@@ -83,6 +111,8 @@ namespace Faseway.GameLibrary.TestGame.Game
 
             // TODO: Add your update logic here
 
+            SceneManager.Update(gameTime.ElapsedGameTime.Ticks);
+
             base.Update(gameTime);
         }
 
@@ -96,7 +126,23 @@ namespace Faseway.GameLibrary.TestGame.Game
 
             // TODO: Add your drawing code here
 
+            SceneManager.Draw();
+
             base.Draw(gameTime);
+        }
+
+        /// <summary>
+        /// Called before the exiting the game.
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="args">The <see cref="System.EventArgs"/>.</param>
+        protected override void OnExiting(object sender, EventArgs args)
+        {
+            Logger.Log("Destroying TestGame ...");
+
+            Seed.Components.Dispose();
+
+            base.OnExiting(sender, args);
         }
     }
 }

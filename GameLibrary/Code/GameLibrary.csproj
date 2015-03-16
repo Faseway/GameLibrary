@@ -56,6 +56,9 @@
     <Compile Include="Game\Handlers\IDrawHandler.cs" />
     <Compile Include="Game\Handlers\IGameHandler.cs" />
     <Compile Include="Game\Handlers\IUpdateHandler.cs" />
+    <Compile Include="Game\Scenes\Scene.cs" />
+    <Compile Include="Game\Scenes\SceneContainer.cs" />
+    <Compile Include="Game\Scenes\SceneManager.cs" />
     <Compile Include="Game\Score.cs" />
     <Compile Include="Localization\Category.cs" />
     <Compile Include="Localization\Language.cs" />
