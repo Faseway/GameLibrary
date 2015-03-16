@@ -52,11 +52,22 @@ namespace Faseway.GameLibrary.UI
         }
 
         // Methods
+        /// <summary>
+        /// Returns a widget at the specified index.
+        /// </summary>
+        /// <param name="index">The index.</param>
+        /// <returns>The <see cref="Faseway.GameLibrary.UI.Widget"/> at the specified index.</returns>
         public Widget Get(int index)
         {
             return Widgets[index];
         }
 
+        /// <summary>
+        /// Returns a widget at the specified index.
+        /// </summary>
+        /// <typeparam name="T">The widget type.</typeparam>
+        /// <param name="index">The index.</param>
+        /// <returns>The <see cref="Faseway.GameLibrary.UI.Widget"/> at the specified index.</returns>
         public T Get<T>(int index) where T : Widget
         {
             return (T)Convert.ChangeType(Widgets[index], typeof(T));
