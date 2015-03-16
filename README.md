@@ -37,6 +37,18 @@ Base
 └─ Textures
 ```
 
+###### Scripting
+
+Our Game Library provides the ability to use scripts in the form of dynamic runtime code. We distinguish in `MissionScript`s and `CommandScript`s. Scripts are loaded once at application start. Changes to scripts at runtime have no impact on the running application.
+
+While working with entities, we always use command scripts. You can easily create and execute them. To execute a command use
+
+```csharp
+Entity.ExecuteCommand("Attack", TargetEntity);
+```
+
+for example.
+
 ### Development
 
 Want to contribute? Great! Do it!
