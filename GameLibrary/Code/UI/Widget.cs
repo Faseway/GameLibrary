@@ -83,7 +83,6 @@ namespace Faseway.GameLibrary.UI
                 OnVisibilityChanged();
             }
         }
-
         /// <summary>
         /// Gets a value indicating whether the widget has children.
         /// </summary>
@@ -96,11 +95,10 @@ namespace Faseway.GameLibrary.UI
         /// Gets or sets the opacity of the widget.
         /// </summary>
         public float Opacity { get; set; }
-
-        //public Rectangle Bounds
-        //{
-        //    get { return new Rectangle((int)ScreenPosition.X, (int)ScreenPosition.Y, Width, Height); }
-        //}
+        
+        /// <summary>
+        /// Gets or sets the width.
+        /// </summary>
         public float Width
         {
             get { return _width; }
@@ -112,6 +110,9 @@ namespace Faseway.GameLibrary.UI
                 //OnBoundsChanged();
             }
         }
+        /// <summary>
+        /// Gets or sets the height.
+        /// </summary>
         public float Height
         {
             get { return _height; }
@@ -123,11 +124,20 @@ namespace Faseway.GameLibrary.UI
                 //OnBoundsChanged();
             }
         }
+        /// <summary>
+        /// Gets or sets the position.
+        /// </summary>
         public Vector2 Position { get; set; }
-        //public Vector2 ScreenPosition
-        //{
-        //    get { return Container.ScreenPosition + Position; }
-        //}
+        /// <summary>
+        /// Gets or sets the screen position.
+        /// </summary>
+        public override Vector2 ScreenPosition
+        {
+            get { return Container.ScreenPosition + Position; }
+        }
+        /// <summary>
+        /// Gets or sets the size of the widget.
+        /// </summary>
         public Vector2 Size
         {
             get
@@ -140,13 +150,27 @@ namespace Faseway.GameLibrary.UI
                 Height = value.Y;
             }
         }
+        /// <summary>
+        /// Gets the boundaries.
+        /// </summary>
+        public Rectangle Bounds
+        {
+            get { return new Rectangle((int)ScreenPosition.X, (int)ScreenPosition.Y, (int)Width, (int)Height); }
+        }
 
+        /// <summary>
+        /// Gets or sets the widget state.
+        /// </summary>
+        public WidgetState State { get; set; }
+
+        /// <summary>
+        /// Gets or sets the parent widget container.
+        /// </summary>
         public WidgetContainer Container { get; set; }
 
         // Events
         public event EventHandler Load;
         public event EventHandler Unload;
-        public event EventHandler ContentLoad;
 
         public event EventHandler GotFocus;
         public event EventHandler LostFocus;
@@ -170,6 +194,8 @@ namespace Faseway.GameLibrary.UI
             Visible = true;
 
             Opacity = 1.0f;
+
+            State = WidgetState.Normal;
 
             OnLoad();
         }
@@ -206,16 +232,6 @@ namespace Faseway.GameLibrary.UI
         }
 
         /// <summary>
-        /// LoadContent will be called once per game and is the place to load
-        /// all of your content.
-        /// </summary>
-        public void LoadContent()
-        {
-            OnContentLoad();
-            Widgets.ForEach(widget => widget.LoadContent());
-        }
-
-        /// <summary>
         /// Updates the widget.
         /// </summary>
         public override void Update(float elapsed)
@@ -248,11 +264,6 @@ namespace Faseway.GameLibrary.UI
         protected virtual void OnUnload()
         {
             Unload.SafeInvoke(this, EventArgs.Empty);
-        }
-
-        protected virtual void OnContentLoad()
-        {
-            ContentLoad.SafeInvoke(this, EventArgs.Empty);
         }
 
         protected virtual void OnGotFocus()

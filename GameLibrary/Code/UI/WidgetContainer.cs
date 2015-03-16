@@ -5,6 +5,7 @@ using System.Text;
 
 using Faseway.GameLibrary.UI.Base;
 
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 
@@ -16,11 +17,25 @@ namespace Faseway.GameLibrary.UI
     public class WidgetContainer : IWidgetContainer
     {
         // Properties
+        /// <summary>
+        /// Gets a collection of all widgets.
+        /// </summary>
         public List<Widget> Widgets { get; set; }
+        /// <summary>
+        /// Gets or sets the screen position.
+        /// </summary>
+        public virtual Vector2 ScreenPosition { get; set; }
+
+        /// <summary>
+        /// Gets the graphics device.
+        /// </summary>
         public GraphicsDevice Graphics
         {
             get { return Seed.Components.GetAndRequire<XnaReference>().Graphics; }
         }
+        /// <summary>
+        /// Gets the content manager.
+        /// </summary>
         public ContentManager Content
         {
             get { return Seed.Components.GetAndRequire<XnaReference>().Content; }
@@ -33,6 +48,7 @@ namespace Faseway.GameLibrary.UI
         public WidgetContainer()
         {
             Widgets = new List<Widget>();
+            ScreenPosition = Vector2.Zero;
         }
 
         // Methods

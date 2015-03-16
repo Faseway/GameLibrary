@@ -19,15 +19,12 @@ namespace Faseway.GameLibrary.UI.Widgets
             : base(container)
         {
             Color = Color.White;
-        }
 
-        // Methods
-        protected override void OnContentLoad()
-        {
             _spriteBatch = new SpriteBatch(Graphics);
             _spriteFont = Content.Load<SpriteFont>("Data//Fonts//Default");
         }
 
+        // Methods
         protected override void OnPaint()
         {
             if (!string.IsNullOrEmpty(Text))

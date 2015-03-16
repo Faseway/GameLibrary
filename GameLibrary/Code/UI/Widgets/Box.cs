@@ -17,16 +17,13 @@ namespace Faseway.GameLibrary.UI.Widgets
             : base(container)
         {
             Color = Color.White;
-        }
 
-        // Methods
-        protected override void OnContentLoad()
-        {
             _spriteBatch = new SpriteBatch(Graphics);
             _texture = new Texture2D(Graphics, 1, 1);
             _texture.SetData(new Color[] { Color });
         }
 
+        // Methods
         protected override void OnPaint()
         {
             _spriteBatch.Begin();

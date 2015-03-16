@@ -27,6 +27,13 @@ namespace Faseway.GameLibrary.Game.Scenes
         {
             get { return Seed.Components.GetAndRequire<XnaReference>().Graphics; }
         }
+        /// <summary>
+        /// Gets the content manager.
+        /// </summary>
+        protected ContentManager Content
+        {
+            get { return Seed.Components.GetAndRequire<XnaReference>().Content; }
+        }
 
         // Constructors
         /// <summary>

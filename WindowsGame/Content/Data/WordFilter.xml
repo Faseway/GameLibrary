@@ -1,0 +1,4 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<WordFilter Version="1.0">
+  <Word Find="ass" Replace="***" CaseSensitive="0" DetectBogusChar="1" />
+</WordFilter>

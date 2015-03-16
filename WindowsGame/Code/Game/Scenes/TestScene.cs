@@ -1,4 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 
 using Faseway.GameLibrary;
 using Faseway.GameLibrary.Components;
@@ -15,6 +16,8 @@ namespace Faseway.GameLibrary.TestGame.Game.Scenes
     {
         // Variables
         private WidgetContainer _container;
+        private SpriteBatch _spriteBatch;
+        private Texture2D _spriteTexture;
 
         // Methods
         public override void OnEnter()
@@ -54,7 +57,8 @@ namespace Faseway.GameLibrary.TestGame.Game.Scenes
                 Position = new Vector2(5, 5)
             };
 
-            _container.Widgets.ForEach(widget => widget.LoadContent());
+            _spriteBatch = new SpriteBatch(Graphics);
+            _spriteTexture = Content.Load<Texture2D>("Textures\\Objects");
 
             IsLoaded = true;
         }
@@ -76,6 +80,11 @@ namespace Faseway.GameLibrary.TestGame.Game.Scenes
         public override void Draw()
         {
             _container.Draw();
+
+            _spriteBatch.Begin();
+            _spriteBatch.Draw(_spriteTexture, new Vector2(5, 100), Color.White);
+            //_spriteBatch.Draw(_spriteTexture, new Vector2(5, 5), new Rectangle(0, 0, 54, 54), Color.White);
+            _spriteBatch.End();
 
             base.Draw();
         }
