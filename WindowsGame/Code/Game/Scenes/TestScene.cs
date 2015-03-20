@@ -1,5 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Media;
 
 using Faseway.GameLibrary;
 using Faseway.GameLibrary.Components;
@@ -18,6 +20,7 @@ namespace Faseway.GameLibrary.TestGame.Game.Scenes
         private WidgetContainer _container;
         private SpriteBatch _spriteBatch;
         private Texture2D _spriteTexture;
+        private Song _mainTheme;
 
         // Methods
         public override void OnEnter()
@@ -33,7 +36,11 @@ namespace Faseway.GameLibrary.TestGame.Game.Scenes
         public override void LoadContent()
         {
             _container = new WidgetContainer();
-            
+
+            //_mainTheme = Content.Load<Song>("Audio\\Soundtrack\\MainTheme");
+            //MediaPlayer.Play(_mainTheme);
+            //MediaPlayer.Volume = 0.2f;
+
             new Box(_container)
             {
                 Position = new Vector2(Graphics.PresentationParameters.BackBufferWidth - 55, 5),
@@ -55,6 +62,13 @@ namespace Faseway.GameLibrary.TestGame.Game.Scenes
             new Label(_container)
             {
                 Position = new Vector2(5, 5)
+            };
+
+            new Button(_container)
+            {
+                Position = new Vector2(300, 5),
+                Size = new Vector2(100, 20),
+                Text = "Button"
             };
 
             _spriteBatch = new SpriteBatch(Graphics);

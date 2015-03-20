@@ -21,7 +21,7 @@ namespace Faseway.GameLibrary.UI.Widgets
             Color = Color.White;
 
             _spriteBatch = new SpriteBatch(Graphics);
-            _spriteFont = Content.Load<SpriteFont>("Data//Fonts//Default");
+            _spriteFont = Graphics2D.Font;
         }
 
         // Methods

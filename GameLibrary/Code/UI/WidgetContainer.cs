@@ -44,11 +44,11 @@ namespace Faseway.GameLibrary.UI
             get { return Seed.Components.GetAndRequire<XnaReference>().GetAndRequire<ContentManager>(); }
         }
         /// <summary>
-        /// Gets a pixel.
+        /// Gets the graphics 2d.
         /// </summary>
-        public Texture2D Pixel 
+        public Graphics2D Graphics2D 
         {
-            get { return Seed.Components.GetAndRequire<Graphics2D>().Pixel; }
+            get { return Seed.Components.GetAndRequire<Graphics2D>(); }
         }
 
         // Constructor

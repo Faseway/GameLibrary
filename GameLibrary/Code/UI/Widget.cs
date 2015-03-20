@@ -7,8 +7,10 @@ using Faseway.GameLibrary.Extra;
 using Faseway.GameLibrary.Game.Handlers;
 using Faseway.GameLibrary.UI;
 using Faseway.GameLibrary.UI.Base;
+using Faseway.GameLibrary.UI.Events;
 
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Input;
 
 namespace Faseway.GameLibrary.UI
 {
@@ -25,6 +27,17 @@ namespace Faseway.GameLibrary.UI
 
         private float _width;
         private float _height;
+
+        private MouseState _currentMouse;
+        private MouseState _lastMouse;
+
+        private KeyboardState _currentKeyboard;
+        private KeyboardState _lastKeyboard;
+
+        private bool _containsMouse;
+
+        private bool _mouseDown;
+        private bool _mouseUp;
 
         // Properties
         /// <summary>
@@ -178,6 +191,16 @@ namespace Faseway.GameLibrary.UI
         public event EventHandler EnablementChanged;
         public event EventHandler VisibilityChanged;
 
+        public event EventHandler<MouseEventArgs> Click;
+
+        public event EventHandler<MouseEventArgs> MouseEnter;
+        public event EventHandler<MouseEventArgs> MouseLeave;
+        public event EventHandler<MouseEventArgs> MouseDown;
+        public event EventHandler<MouseEventArgs> MouseUp;
+        public event EventHandler<MouseEventArgs> MouseMove;
+
+        public event EventHandler<KeyEventArgs> KeyPress;
+
         public event EventHandler Refresh;
         public event EventHandler Paint;
 
@@ -238,6 +261,79 @@ namespace Faseway.GameLibrary.UI
         {
             if (Enabled)
             {
+                //if (_dirty)
+                //{
+                //    OnCreateWidget();
+                //    _dirty = false;
+                //}
+
+                _currentMouse = Mouse.GetState();
+                _currentKeyboard = Keyboard.GetState();
+
+                MouseEventArgs mouseEvent = new MouseEventArgs(new Vector2(_currentMouse.X, _currentMouse.Y), _currentMouse);
+
+                bool mouseIn = Bounds.Contains(_currentMouse.X, _currentMouse.Y);
+
+                if (!_containsMouse && mouseIn)
+                {
+                    OnMouseEnter(mouseEvent);
+                }
+                if (_containsMouse && !mouseIn)
+                {
+                    OnMouseLeave(mouseEvent);
+
+                    _mouseDown = false;
+                    _mouseUp = false;
+                }
+
+                _containsMouse = mouseIn;
+
+                if (_containsMouse && _currentMouse.LeftButton == ButtonState.Pressed)
+                {
+                    State = WidgetState.Clicked;
+                }
+                else if (_containsMouse && _currentMouse.LeftButton == ButtonState.Released)
+                {
+                    State = WidgetState.Hovered;
+                }
+                else if (Focused)
+                {
+                    State = WidgetState.Focused;
+                }
+                else if (Enabled)
+                {
+                    State = WidgetState.Normal;
+                }
+                else
+                {
+                    State = WidgetState.Disabled;
+                }
+
+                if (_currentMouse.LeftButton == ButtonState.Pressed &&
+                    _lastMouse.LeftButton == ButtonState.Released && _containsMouse)
+                {
+                    OnMouseDown(mouseEvent);
+                    _mouseDown = true;
+                }
+                if (_currentMouse.LeftButton == ButtonState.Released &&
+                    _lastMouse.LeftButton == ButtonState.Pressed && _containsMouse)
+                {
+                    OnMouseUp(mouseEvent);
+                    _mouseUp = true;
+                }
+                if (_mouseDown && _mouseUp)
+                {
+                    OnClick(mouseEvent);
+
+                    Focused = true;
+
+                    _mouseDown = false;
+                    _mouseUp = false;
+                }
+
+                _lastMouse = _currentMouse;
+                _lastKeyboard = _currentKeyboard;
+
                 OnRefresh();
                 Widgets.ForEach(widget => widget.Update(elapsed));
             }
@@ -284,6 +380,41 @@ namespace Faseway.GameLibrary.UI
         protected virtual void OnVisibilityChanged()
         {
             VisibilityChanged.SafeInvoke(this, EventArgs.Empty);
+        }
+
+        protected virtual void OnClick(MouseEventArgs e)
+        {
+            Click.SafeInvoke(this, e);
+        }
+
+        protected virtual void OnMouseEnter(MouseEventArgs e)
+        {
+            MouseEnter.SafeInvoke(this, e);
+        }
+
+        protected virtual void OnMouseLeave(MouseEventArgs e)
+        {
+            MouseLeave.SafeInvoke(this, e);
+        }
+
+        protected virtual void OnMouseDown(MouseEventArgs e)
+        {
+            MouseDown.SafeInvoke(this, e);
+        }
+
+        protected virtual void OnMouseUp(MouseEventArgs e)
+        {
+            MouseUp.SafeInvoke(this, e);
+        }
+
+        protected virtual void OnMouseMove(MouseEventArgs e)
+        {
+            MouseMove.SafeInvoke(this, e);
+        }
+
+        protected virtual void OnKeyPress(KeyEventArgs e)
+        {
+            KeyPress.SafeInvoke(this, e);
         }
 
         protected virtual void OnRefresh()
