@@ -52,6 +52,9 @@
     <Compile Include="Game\Entities\Entity.cs" />
     <Compile Include="Game\Entities\EntityEnvironment.cs" />
     <Compile Include="Game\Entities\EntityFactory.cs" />
+    <Compile Include="Game\Env\Camera.cs" />
+    <Compile Include="Game\Env\Weather.cs" />
+    <Compile Include="Game\Env\World.cs" />
     <Compile Include="Game\Game.cs" />
     <Compile Include="Game\GameLoop.cs" />
     <Compile Include="Game\Handlers\IDrawHandler.cs" />
