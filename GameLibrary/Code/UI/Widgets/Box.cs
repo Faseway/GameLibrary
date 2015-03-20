@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Faseway.GameLibrary.Rendering;
 
 namespace Faseway.GameLibrary.UI.Widgets
 {
@@ -7,7 +8,6 @@ namespace Faseway.GameLibrary.UI.Widgets
     {
         // Variables
         SpriteBatch _spriteBatch;
-        Texture2D _texture;
 
         // Properties
         public Color Color { get; set; }
@@ -19,15 +19,13 @@ namespace Faseway.GameLibrary.UI.Widgets
             Color = Color.White;
 
             _spriteBatch = new SpriteBatch(Graphics);
-            _texture = new Texture2D(Graphics, 1, 1);
-            _texture.SetData(new Color[] { Color });
         }
 
         // Methods
         protected override void OnPaint()
         {
             _spriteBatch.Begin();
-            _spriteBatch.Draw(_texture, new Rectangle((int)Position.X, (int)Position.Y, (int)Size.X, (int)Size.Y), Color);
+            _spriteBatch.Draw(Pixel, new Rectangle((int)Position.X, (int)Position.Y, (int)Size.X, (int)Size.Y), Color);
             _spriteBatch.End();
         }
     }

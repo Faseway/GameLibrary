@@ -3,12 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-using Faseway.GameLibrary.Components;
-using Faseway.GameLibrary.UI.Base;
-
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
+
+using Faseway.GameLibrary.Components;
+using Faseway.GameLibrary.Rendering;
+using Faseway.GameLibrary.UI;
+using Faseway.GameLibrary.UI.Base;
 
 namespace Faseway.GameLibrary.UI
 {
@@ -40,6 +42,13 @@ namespace Faseway.GameLibrary.UI
         public ContentManager Content
         {
             get { return Seed.Components.GetAndRequire<XnaReference>().GetAndRequire<ContentManager>(); }
+        }
+        /// <summary>
+        /// Gets a pixel.
+        /// </summary>
+        public Texture2D Pixel 
+        {
+            get { return Seed.Components.GetAndRequire<Graphics2D>().Pixel; }
         }
 
         // Constructor

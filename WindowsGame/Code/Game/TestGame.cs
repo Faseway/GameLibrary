@@ -20,6 +20,7 @@ using Faseway.GameLibrary.UI;
 using Faseway.GameLibrary.UI.Widgets;
 
 using Faseway.GameLibrary.TestGame.Game.Scenes;
+using Faseway.GameLibrary.Rendering;
 
 namespace Faseway.GameLibrary.TestGame.Game
 {
@@ -69,9 +70,10 @@ namespace Faseway.GameLibrary.TestGame.Game
             // link
             Reference.Link(Content);
             Reference.Link(GraphicsDevice);
+            Seed.Components.Install(new Graphics2D(GraphicsDevice));
 
-            var reference = Reference.Get<GraphicsDevice>();
-            var reference2 = Reference.Get<GraphicsAdapter>();
+            //var reference = Reference.Get<GraphicsDevice>();
+            //var reference2 = Reference.Get<GraphicsAdapter>();
 
             // install scenes
             SceneManager.Add(new TestScene());
