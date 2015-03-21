@@ -27,9 +27,12 @@ namespace Faseway.GameLibrary.TestGame.Game
     /// <summary>
     /// This is the main type for your game
     /// </summary>
-    public class TestGame : Microsoft.Xna.Framework.Game
+    public class TestGame : Microsoft.Xna.Framework.Game, IComponent
     {
         // Variables
+        private SpriteBatch spriteBatch;
+        private Texture2D cursorTex;
+        private Vector2 cursorPos;
 
         // Properties
         public GraphicsDeviceManager Graphics { get; private set; }
@@ -66,6 +69,7 @@ namespace Faseway.GameLibrary.TestGame.Game
             Seed.Components.Install(new XnaReference());
             Seed.Components.Install(new SceneManager());
             Seed.Components.Install(new GameLoop());
+            Seed.Components.Install(this);
 
             // link
             Reference.Link(Content);
@@ -89,6 +93,8 @@ namespace Faseway.GameLibrary.TestGame.Game
         {
             // Create a new SpriteBatch, which can be used to draw textures.
 
+            spriteBatch = new SpriteBatch(GraphicsDevice);
+            cursorTex = Content.Load<Texture2D>("Textures\\UiSheet");
 
             // TODO: use this.Content to load your game content here
         }
@@ -121,9 +127,13 @@ namespace Faseway.GameLibrary.TestGame.Game
 
             // TODO: Add your update logic here
 
+            cursorPos = new Vector2(Mouse.GetState().X, Mouse.GetState().Y);
+
             Seed.Components.GetAndRequire<GameLoop>().Loop();
 
             SceneManager.Update(gameTime.ElapsedGameTime.Ticks);
+            
+            
 
             base.Update(gameTime);
         }
@@ -139,6 +149,10 @@ namespace Faseway.GameLibrary.TestGame.Game
             // TODO: Add your drawing code here
 
             SceneManager.Draw();
+
+            spriteBatch.Begin();
+            spriteBatch.Draw(cursorTex, new Rectangle((int)cursorPos.X, (int)cursorPos.Y, 20, 27), new Rectangle(364, 450, 20, 27), Color.White);
+            spriteBatch.End();
 
             base.Draw(gameTime);
         }

@@ -37,9 +37,8 @@ namespace Faseway.GameLibrary.TestGame.Game.Scenes
         {
             _container = new WidgetContainer();
 
-            //_mainTheme = Content.Load<Song>("Audio\\Soundtrack\\MainTheme");
-            //MediaPlayer.Play(_mainTheme);
-            //MediaPlayer.Volume = 0.2f;
+            _mainTheme = Content.Load<Song>("Audio\\Soundtrack\\MainTheme");
+            MediaPlayer.Volume = 0.2f;
 
             new Box(_container)
             {
@@ -70,6 +69,29 @@ namespace Faseway.GameLibrary.TestGame.Game.Scenes
                 Size = new Vector2(100, 20),
                 Text = "Button"
             };
+
+            var btn = new Button(_container)
+            {
+                Position = new Vector2(410, 5),
+                Size = new Vector2(100, 20),
+                Text = "Play Music"
+            };
+            btn.MouseUp += (s, e) => { MediaPlayer.Play(_mainTheme); };
+            btn = new Button(_container)
+            {
+                Position = new Vector2(410, 30),
+                Size = new Vector2(100, 20),
+                Text = "Stop Music"
+            };
+            btn.MouseUp += (s, e) => { MediaPlayer.Stop(); };
+
+            btn = new Button(_container)
+            {
+                Position = new Vector2(520, 30),
+                Size = new Vector2(100, 20),
+                Text = "Exit"
+            };
+            btn.MouseUp += (s, e) => { Seed.Components.Get<TestGame>().Exit(); };
 
             _spriteBatch = new SpriteBatch(Graphics);
             _spriteTexture = Content.Load<Texture2D>("Textures\\Objects");

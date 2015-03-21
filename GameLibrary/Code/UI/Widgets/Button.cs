@@ -11,6 +11,7 @@ namespace Faseway.GameLibrary.UI.Widgets
         private Box _box;
         private Label _label;
         private SoundEffect _sound;
+        private SoundEffect _click;
 
         // Properties
         public string Text 
@@ -27,7 +28,10 @@ namespace Faseway.GameLibrary.UI.Widgets
             {
                 Color = Color.Gray
             };
-            _box.MouseUp += new System.EventHandler<Events.MouseEventArgs>(OnMouseUpHandler);
+            _box.MouseEnter += (s, e) => { _click.Play(); _box.Color = Color.LightGreen; };
+            _box.MouseDown += (s, e) => { _box.Color = Color.DarkSeaGreen; };
+            _box.MouseUp += (s, e) => { _sound.Play(); _box.Color = Color.LightGreen; this.OnMouseUp(e);  };
+            _box.MouseLeave += (s, e) => { _box.Color = Color.Gray; };
 
             _label = new Label(container);
         }
@@ -35,9 +39,10 @@ namespace Faseway.GameLibrary.UI.Widgets
         // Methods
         protected override void OnLoad()
         {
-            _sound = Content.Load<SoundEffect>("Audio\\FX\\Cow");
+            _sound = Content.Load<SoundEffect>("Audio\\FX\\UI\\click3");
+            _click = Content.Load<SoundEffect>("Audio\\FX\\UI\\click2");
         }
-        
+
         private void OnMouseUpHandler(object sender, Events.MouseEventArgs e)
         {
             _sound.Play();

@@ -25,7 +25,7 @@ namespace Faseway.GameLibrary.TestGame
             using (var game = new TestGame.Game.TestGame())
             {
                 game.Window.Title = "Faseway Windows Test Game";
-                game.IsMouseVisible = true;
+                //game.IsMouseVisible = true;
 
                 game.Run();
             }

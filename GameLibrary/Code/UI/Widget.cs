@@ -15,7 +15,7 @@ using Microsoft.Xna.Framework.Input;
 namespace Faseway.GameLibrary.UI
 {
     /// <summary>
-    /// Provides a widget for user interfaces.
+    /// Provides the base class for widgets, which are components for user interfaces.
     /// </summary>
     public abstract class Widget : WidgetContainer
     {
@@ -105,6 +105,24 @@ namespace Faseway.GameLibrary.UI
         }
 
         /// <summary>
+        /// Infrastructure. This property is not relevant for this class.
+        /// </summary>
+        public virtual bool AutoSize { get; set; }
+
+        /// <summary>
+        /// Gets or sets the name of the widget.
+        /// </summary>
+        public string Name { get; set; }
+        /// <summary>
+        /// Gets or sets the object that contains data about the widget.
+        /// </summary>
+        public object Tag { get; set; }
+        /// <summary>
+        /// Gets or sets the text associated with this widget.
+        /// </summary>
+        public string Text { get; set; }
+
+        /// <summary>
         /// Gets or sets the opacity of the widget.
         /// </summary>
         public float Opacity { get; set; }
@@ -170,6 +188,11 @@ namespace Faseway.GameLibrary.UI
         {
             get { return new Rectangle((int)ScreenPosition.X, (int)ScreenPosition.Y, (int)Width, (int)Height); }
         }
+
+        /// <summary>
+        /// Gets or sets the background color for the widget.
+        /// </summary>
+        public Color BackColor { get; set; }
 
         /// <summary>
         /// Gets or sets the widget state.
