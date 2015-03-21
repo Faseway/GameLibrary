@@ -27,6 +27,10 @@ namespace Faseway.GameLibrary.Rendering
         /// Gets the default sprite font.
         /// </summary>
         public SpriteFont Font { get; private set; }
+        /// <summary>
+        /// Gets a sprite batch.
+        /// </summary>
+        public SpriteBatch SpriteBatch { get; private set; }
 
         // Constructor
         /// <summary>
@@ -43,6 +47,8 @@ namespace Faseway.GameLibrary.Rendering
                 Pixel.SetData<Color>(new Color[] { Color.White });
 
                 Font = Seed.Components.GetAndRequire<XnaReference>().GetAndRequire<ContentManager>().Load<SpriteFont>("Data//Fonts//Default");
+
+                SpriteBatch = new SpriteBatch(graphicsDevice);
             }
             catch (Exception ex)
             {
