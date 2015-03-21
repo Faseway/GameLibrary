@@ -182,26 +182,79 @@ namespace Faseway.GameLibrary.UI
         public WidgetContainer Container { get; set; }
 
         // Events
+        /// <summary>
+        /// Occurs when the widget is created.
+        /// </summary>
         public event EventHandler Load;
+        /// <summary>
+        /// Occurs when the widget is destroyed.
+        /// </summary>
         public event EventHandler Unload;
 
+        /// <summary>
+        /// Occurs when the widget got focused.
+        /// </summary>
         public event EventHandler GotFocus;
+        /// <summary>
+        /// Occurs when the widget lost focus.
+        /// </summary>
         public event EventHandler LostFocus;
 
+        /// <summary>
+        /// Occurs when the enablement of widget changed.
+        /// </summary>
         public event EventHandler EnablementChanged;
+        /// <summary>
+        /// Occurs when the visibility of the widget changed.
+        /// </summary>
         public event EventHandler VisibilityChanged;
 
+        /// <summary>
+        /// Occurs when the mouse pointer is over the widget and a mouse button was pressed.
+        /// </summary>
         public event EventHandler<MouseEventArgs> Click;
 
+        /// <summary>
+        /// Occurs when the mouse pointer enters the widget.
+        /// </summary>
         public event EventHandler<MouseEventArgs> MouseEnter;
-        public event EventHandler<MouseEventArgs> MouseLeave;
-        public event EventHandler<MouseEventArgs> MouseDown;
-        public event EventHandler<MouseEventArgs> MouseUp;
+        /// <summary>
+        /// Occurs when the mouse pointer is moved over the widget.
+        /// </summary>
         public event EventHandler<MouseEventArgs> MouseMove;
+        /// <summary>
+        /// Occurs when the mouse pointer rests on the widget.
+        /// </summary>
+        public event EventHandler<MouseEventArgs> MouseHover;
+        /// <summary>
+        /// Occurs when the mouse pointer is over the widget and a mouse button is pressed.
+        /// </summary>
+        public event EventHandler<MouseEventArgs> MouseDown;
+        /// <summary>
+        /// Occurs when the mouse wheel moves while the widget has focus.
+        /// </summary>
+        public event EventHandler<MouseEventArgs> MouseWheel;
+        /// <summary>
+        /// Occurs when the mouse pointer is over the widget and a mouse button is released.
+        /// </summary>
+        public event EventHandler<MouseEventArgs> MouseUp;
+        /// <summary>
+        /// Occurs when the mouse pointer leaves the widget.
+        /// </summary>
+        public event EventHandler<MouseEventArgs> MouseLeave;
 
+        /// <summary>
+        /// Occurs when a key is pressed while the widget has focus.
+        /// </summary>
         public event EventHandler<KeyEventArgs> KeyPress;
 
+        /// <summary>
+        /// Occurs when the widget is updated.
+        /// </summary>
         public event EventHandler Refresh;
+        /// <summary>
+        /// Occurs when the widget is redrawn.
+        /// </summary>
         public event EventHandler Paint;
 
         // Constructor
@@ -212,7 +265,7 @@ namespace Faseway.GameLibrary.UI
         {
             Container = container;
             Container.Widgets.Add(this);
-
+            
             Enabled = true;
             Visible = true;
 

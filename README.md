@@ -49,6 +49,16 @@ Entity.ExecuteCommand("Attack", TargetEntity);
 
 for example.
 
+###### Gui System (Gooey)
+
+Mouse events occur in the following order:
+
+1. MouseEnter
+2. MouseMove
+3. MouseHover / MouseDown / MouseWheel
+4. MouseUp
+5. MouseLeave
+
 ### Development
 
 Want to contribute? Great! Do it!
