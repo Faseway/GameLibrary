@@ -138,7 +138,7 @@ namespace Faseway.GameLibrary.UI
                 _width = value;
                 _dirty = true;
 
-                //OnBoundsChanged();
+                OnBoundsChanged();
             }
         }
         /// <summary>
@@ -152,7 +152,7 @@ namespace Faseway.GameLibrary.UI
                 _height = value;
                 _dirty = true;
 
-                //OnBoundsChanged();
+                OnBoundsChanged();
             }
         }
         /// <summary>
@@ -231,6 +231,10 @@ namespace Faseway.GameLibrary.UI
         /// Occurs when the visibility of the widget changed.
         /// </summary>
         public event EventHandler VisibilityChanged;
+        /// <summary>
+        /// Occurs when the bounds of the widget changed.
+        /// </summary>
+        public event EventHandler BoundsChanged;
 
         /// <summary>
         /// Occurs when the mouse pointer is over the widget and a mouse button was pressed.
@@ -349,7 +353,7 @@ namespace Faseway.GameLibrary.UI
                 MouseEventArgs mouseEvent = new MouseEventArgs(new Vector2(_currentMouse.X, _currentMouse.Y), _currentMouse);
 
                 bool mouseIn = Bounds.Contains(_currentMouse.X, _currentMouse.Y);
-
+                
                 if (!_containsMouse && mouseIn)
                 {
                     OnMouseEnter(mouseEvent);
@@ -456,6 +460,11 @@ namespace Faseway.GameLibrary.UI
         protected virtual void OnVisibilityChanged()
         {
             VisibilityChanged.SafeInvoke(this, EventArgs.Empty);
+        }
+
+        protected virtual void OnBoundsChanged()
+        {
+            BoundsChanged.SafeInvoke(this, EventArgs.Empty);
         }
 
         protected virtual void OnClick(MouseEventArgs e)

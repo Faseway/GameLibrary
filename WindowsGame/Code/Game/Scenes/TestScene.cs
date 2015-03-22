@@ -87,7 +87,7 @@ namespace Faseway.GameLibrary.TestGame.Game.Scenes
 
             btn = new Button(_container)
             {
-                Position = new Vector2(520, 30),
+                Position = new Vector2(520, 5),
                 Size = new Vector2(100, 20),
                 Text = "Exit"
             };
@@ -104,11 +104,13 @@ namespace Faseway.GameLibrary.TestGame.Game.Scenes
             _container.Update(elapsed);
 
             _container.Get<Label>(3).Text = string.Format(
-                "Faseway Game Library\nVersion: {0}\nBuild: {1}\nFrameIndex: {2:000000}\nFrameRate: {3}",
+                "Faseway Game Library\nVersion: {0}\nBuild: {1}\nFrameIndex: {2:000000}\nFrameRate: {3}\nMousePosition: {4}\nMouseState: {5}",
                 Seed.Version,
                 Seed.BuildDate,
                 Seed.Components.GetAndRequire<GameLoop>().FrameIndex,
-                Seed.Components.GetAndRequire<GameLoop>().FramesPerSecond);
+                Seed.Components.GetAndRequire<GameLoop>().FramesPerSecond,
+                new Vector2(Mouse.X, Mouse.Y),
+                Mouse.LeftButton);
 
             base.Update(elapsed);
         }
@@ -118,7 +120,7 @@ namespace Faseway.GameLibrary.TestGame.Game.Scenes
             _container.Draw();
 
             _spriteBatch.Begin();
-            _spriteBatch.Draw(_spriteTexture, new Vector2(5, 100), Color.White);
+            _spriteBatch.Draw(_spriteTexture, new Vector2(5, 150), Color.White);
             //_spriteBatch.Draw(_spriteTexture, new Vector2(5, 5), new Rectangle(0, 0, 54, 54), Color.White);
             _spriteBatch.End();
 

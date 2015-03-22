@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
 
 using Faseway.GameLibrary.Components;
 using Faseway.GameLibrary.Logging;
@@ -34,6 +35,20 @@ namespace Faseway.GameLibrary.Game.Scenes
         protected ContentManager Content
         {
             get { return Seed.Components.GetAndRequire<XnaReference>().GetAndRequire<ContentManager>(); }
+        }
+        /// <summary>
+        /// Gets the current state of the mouse, including mouse position and buttons pressed.
+        /// </summary>
+        protected MouseState Mouse
+        {
+            get { return Microsoft.Xna.Framework.Input.Mouse.GetState(); }
+        }
+        /// <summary>
+        /// Gets the current keyboard state.
+        /// </summary>
+        protected KeyboardState Keyboard
+        {
+            get { return Microsoft.Xna.Framework.Input.Keyboard.GetState(); }
         }
 
         // Constructors
