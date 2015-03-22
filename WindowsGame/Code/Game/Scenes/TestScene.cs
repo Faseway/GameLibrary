@@ -63,25 +63,28 @@ namespace Faseway.GameLibrary.TestGame.Game.Scenes
                 Position = new Vector2(5, 5)
             };
 
-            new Button(_container)
+            var btn = new Button(_container)
             {
                 Position = new Vector2(300, 5),
                 Size = new Vector2(100, 20),
                 Text = "Button"
             };
+            btn.MouseUp += (s, e) => { _container.Get("ButtonPlayMusic").Enabled = !_container.Get("ButtonPlayMusic").Enabled; };
 
-            var btn = new Button(_container)
+            btn = new Button(_container)
             {
                 Position = new Vector2(410, 5),
                 Size = new Vector2(100, 20),
-                Text = "Play Music"
+                Text = "Play Music",
+                Name = "ButtonPlayMusic"
             };
             btn.MouseUp += (s, e) => { MediaPlayer.Play(_mainTheme); };
             btn = new Button(_container)
             {
                 Position = new Vector2(410, 30),
                 Size = new Vector2(100, 20),
-                Text = "Stop Music"
+                Text = "Stop Music",
+                Name = "ButtonStopMusic"
             };
             btn.MouseUp += (s, e) => { MediaPlayer.Stop(); };
 

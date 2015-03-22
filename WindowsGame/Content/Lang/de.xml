@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<language version="1.0" languagecode="de" languagename="Deutsch">
+  <category name="commands">
+    <item name="Attack"><![CDATA[Angrifen]]></item>
+    <item name="Move"><![CDATA[Bewegen]]></item>
+    <item name="Use"><![CDATA[Benutzen]]></item>
+  </category>
+  
+  <category name="common">
+    <item name="welcome"><![CDATA[Willkommen]]></item>
+    <item name="security"><![CDATA[Sicherheit]]></item>
+    <item name="birthday"><![CDATA[Geburtstag]]></item>
+  </category>
+
+  <category name="test">
+    <item name="test1"><![CDATA[test1]]></item>
+    <item name="test2"><![CDATA[test2]]></item>
+    <item name="test3"><![CDATA[test3]]></item>
+  </category>
+</language>

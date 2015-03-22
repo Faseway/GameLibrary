@@ -78,6 +78,7 @@
     <Compile Include="MsgBoxIcon.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Rendering\Graphics2D.cs" />
+    <Compile Include="Rendering\SpriteSheet.cs" />
     <Compile Include="UI\Base\TextAlignment.cs" />
     <Compile Include="UI\Events\KeyEventArgs.cs" />
     <Compile Include="UI\Events\MouseEventArgs.cs" />

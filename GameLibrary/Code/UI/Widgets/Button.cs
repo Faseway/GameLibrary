@@ -13,6 +13,7 @@ namespace Faseway.GameLibrary.UI.Widgets
         private Label _label;
         private SoundEffect _soundEffectHover;
         private SoundEffect _soundEffectClick;
+        private Texture2D _texture;
 
         // Properties
         public string Text 
@@ -65,7 +66,7 @@ namespace Faseway.GameLibrary.UI.Widgets
         {
             _soundEffectHover = Content.Load<SoundEffect>("Audio\\FX\\UI\\click2");
             _soundEffectClick = Content.Load<SoundEffect>("Audio\\FX\\UI\\click3");
-
+            
             base.OnLoad();
         }
 
@@ -113,7 +114,7 @@ namespace Faseway.GameLibrary.UI.Widgets
             }
             _label.Position = Position;
             _label.Update(0f);
-
+            
             base.OnRefresh();
         }
 

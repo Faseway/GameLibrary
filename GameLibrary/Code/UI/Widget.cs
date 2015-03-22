@@ -353,7 +353,7 @@ namespace Faseway.GameLibrary.UI
                 MouseEventArgs mouseEvent = new MouseEventArgs(new Vector2(_currentMouse.X, _currentMouse.Y), _currentMouse);
 
                 bool mouseIn = Bounds.Contains(_currentMouse.X, _currentMouse.Y);
-                
+
                 if (!_containsMouse && mouseIn)
                 {
                     OnMouseEnter(mouseEvent);
@@ -413,10 +413,14 @@ namespace Faseway.GameLibrary.UI
 
                 _lastMouse = _currentMouse;
                 _lastKeyboard = _currentKeyboard;
-
-                OnRefresh();
+                
                 Widgets.ForEach(widget => widget.Update(elapsed));
             }
+            else
+            {
+                State = WidgetState.Disabled;
+            }
+            OnRefresh();
         }
 
         /// <summary>

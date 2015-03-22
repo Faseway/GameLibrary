@@ -80,7 +80,28 @@ namespace Faseway.GameLibrary.UI
         /// <returns>The <see cref="Faseway.GameLibrary.UI.Widget"/> at the specified index.</returns>
         public T Get<T>(int index) where T : Widget
         {
-            return (T)Convert.ChangeType(Widgets[index], typeof(T));
+            return (T)Convert.ChangeType(Get(index), typeof(T));
+        }
+
+        /// <summary>
+        /// Returns a widget with the specified name.
+        /// </summary>
+        /// <param name="name">The name.</param>
+        /// <returns>The <see cref="Faseway.GameLibrary.UI.Widget"/> with the specified name.</returns>
+        public Widget Get(string name)
+        {
+            return Widgets.Find(widget => widget.Name == name);
+        }
+
+        /// <summary>
+        /// Returns a widget with the specified name.
+        /// </summary>
+        /// <typeparam name="T">The widget type.</typeparam>
+        /// <param name="name">The name.</param>
+        /// <returns>The <see cref="Faseway.GameLibrary.UI.Widget"/> with the specified name.</returns>
+        public T Get<T>(string name) where T : Widget
+        {
+            return (T)Convert.ChangeType(Get(name), typeof(T));
         }
 
         /// <summary>
