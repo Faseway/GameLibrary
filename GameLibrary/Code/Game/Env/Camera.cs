@@ -70,7 +70,11 @@ namespace Faseway.GameLibrary.Game.Env
             DisplayOffset = position;
         }
 
-        public void Update(float elapsed)
+        /// <summary>
+        /// Called when the game should be updated.
+        /// </summary>
+        /// <param name="gameTime">Provides a snapshot of timing values.</param>
+        public void Update(GameTime gameTime)
         {
             if (Target != null && !Target.IsEnabled)
             {
@@ -88,7 +92,11 @@ namespace Faseway.GameLibrary.Game.Env
             }
         }
 
-        public void Draw()
+        /// <summary>
+        /// Called when the game should be rendered.
+        /// </summary>
+        /// <param name="gameTime">Provides a snapshot of timing values.</param>
+        public void Draw(GameTime gameTime)
         {
             throw new System.NotImplementedException();
         }

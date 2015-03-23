@@ -8,6 +8,7 @@ using Faseway.GameLibrary.Extra;
 using Faseway.GameLibrary.Game;
 using Faseway.GameLibrary.Game.Entities;
 using Faseway.GameLibrary.Game.Handlers;
+using Microsoft.Xna.Framework;
 
 namespace Faseway.GameLibrary.Game.Env
 {
@@ -41,13 +42,21 @@ namespace Faseway.GameLibrary.Game.Env
         }
 
         // Methods
-        public void Update(float elapsed)
+        /// <summary>
+        /// Called when the game should be updated.
+        /// </summary>
+        /// <param name="gameTime">Provides a snapshot of timing values.</param>
+        public void Update(GameTime gameTime)
         {
-            Weather.Update(elapsed);
-            Camera.Update(elapsed);
+            Weather.Update(gameTime);
+            Camera.Update(gameTime);
         }
 
-        public void Draw()
+        /// <summary>
+        /// Called when the game should be rendered.
+        /// </summary>
+        /// <param name="gameTime">Provides a snapshot of timing values.</param>
+        public void Draw(GameTime gameTime)
         {
             throw new NotImplementedException();
         }

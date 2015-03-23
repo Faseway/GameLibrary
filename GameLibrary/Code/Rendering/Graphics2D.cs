@@ -31,6 +31,10 @@ namespace Faseway.GameLibrary.Rendering
         /// Gets a sprite batch.
         /// </summary>
         public SpriteBatch SpriteBatch { get; private set; }
+        /// <summary>
+        /// Gets the window.
+        /// </summary>
+        public GameWindow Window { get; set; }
 
         // Constructor
         /// <summary>

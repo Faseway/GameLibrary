@@ -9,13 +9,14 @@ using Microsoft.Xna.Framework.Input;
 
 using Faseway.GameLibrary.Components;
 using Faseway.GameLibrary.Logging;
+using Faseway.GameLibrary.Game.Handlers;
 
 namespace Faseway.GameLibrary.Game.Scenes
 {
     /// <summary>
     /// Provides a scene container.
     /// </summary>
-    public abstract class SceneContainer
+    public abstract class SceneContainer : IGameHandler
     {
         // Properties
         /// <summary>
@@ -128,14 +129,14 @@ namespace Faseway.GameLibrary.Game.Scenes
         /// Handles a game tick.
         /// </summary>
         /// <param name="elapsed">The elapsed.</param>
-        public virtual void Update(float elapsed)
+        public virtual void Update(GameTime gameTime)
         {
             foreach (Scene scene in OrderedTickScenes())
             {
                 scene.LoadContentIfNeeded();
                 if (scene.IsLoaded)
                 {
-                    scene.Update(elapsed);
+                    scene.Update(gameTime);
                 }
             }
         }
@@ -143,11 +144,11 @@ namespace Faseway.GameLibrary.Game.Scenes
         /// <summary>
         /// Handles a game render.
         /// </summary>
-        public virtual void Draw()
+        public virtual void Draw(GameTime gameTime)
         {
             foreach (Scene scene in OrderedRenderScenes())
             {
-                scene.Draw();
+                scene.Draw(gameTime);
             }
         }
     }

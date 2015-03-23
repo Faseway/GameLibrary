@@ -29,11 +29,6 @@ namespace Faseway.GameLibrary.TestGame.Game
     /// </summary>
     public class TestGame : Microsoft.Xna.Framework.Game, IComponent
     {
-        // Variables
-        private SpriteBatch spriteBatch;
-        private Texture2D cursorTex;
-        private Vector2 cursorPos;
-
         // Properties
         public GraphicsDeviceManager Graphics { get; private set; }
         public SceneManager SceneManager
@@ -43,6 +38,14 @@ namespace Faseway.GameLibrary.TestGame.Game
         public XnaReference Reference
         {
             get { return Seed.Components.GetAndRequire<XnaReference>(); }
+        }
+        public GameLoop GameLoop
+        {
+            get { return Seed.Components.GetAndRequire<GameLoop>(); }
+        }
+        public Cursor Cursor
+        {
+            get { return Seed.Components.GetAndRequire<Cursor>(); }
         }
 
         // Constructor
@@ -69,15 +72,21 @@ namespace Faseway.GameLibrary.TestGame.Game
             Seed.Components.Install(new XnaReference());
             Seed.Components.Install(new SceneManager());
             Seed.Components.Install(new GameLoop());
+            Seed.Components.Install(new Cursor());
             Seed.Components.Install(this);
-
+            
             // link
             Reference.Link(Content);
             Reference.Link(GraphicsDevice);
             Seed.Components.Install(new Graphics2D(GraphicsDevice));
+            Seed.Components.Get<Graphics2D>().Window = Window;
 
             //var reference = Reference.Get<GraphicsDevice>();
             //var reference2 = Reference.Get<GraphicsAdapter>();
+
+            // game loop
+            GameLoop.Subscribe(Cursor);
+            GameLoop.Subscribe(SceneManager);
 
             // install scenes
             SceneManager.Add(new TestScene());
@@ -92,11 +101,24 @@ namespace Faseway.GameLibrary.TestGame.Game
         protected override void LoadContent()
         {
             // Create a new SpriteBatch, which can be used to draw textures.
-
-            spriteBatch = new SpriteBatch(GraphicsDevice);
-            cursorTex = Content.Load<Texture2D>("Textures\\UiSheet");
-
             // TODO: use this.Content to load your game content here
+
+            Cursor.Texture = Content.Load<Texture2D>("Textures\\UI\\Cursors");
+
+            Cursor.Add("Cursor01", new Rectangle(0, 0, 32, 32));
+            Cursor.Add("Cursor01b", new Rectangle(0, 32, 32, 32));
+            Cursor.Add("Cursor02", new Rectangle(32, 0, 32, 32));
+            Cursor.Add("Cursor02b", new Rectangle(32, 32, 32, 32));
+
+            Cursor.Add("Pointer01", new Rectangle(160, 0, 30, 30));
+            Cursor.Add("Pointer02", new Rectangle(190, 0, 30, 30));
+            Cursor.Add("Pointer03", new Rectangle(220, 0, 30, 30));
+
+            Cursor.Add("Sword01", new Rectangle(160, 30, 34, 37));
+            Cursor.Add("Sword02", new Rectangle(160, 67, 34, 37));
+            Cursor.Add("Sword03", new Rectangle(160, 104, 34, 37));
+
+            Cursor.Change("Sword01");
         }
 
         /// <summary>
@@ -115,6 +137,7 @@ namespace Faseway.GameLibrary.TestGame.Game
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Update(GameTime gameTime)
         {
+            // TODO: Add your update logic here
             // Allows the game to exit
 #if XBOX
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed)
@@ -124,16 +147,8 @@ namespace Faseway.GameLibrary.TestGame.Game
             {
                 Exit();
             }
-
-            // TODO: Add your update logic here
-
-            cursorPos = new Vector2(Mouse.GetState().X, Mouse.GetState().Y);
-
-            Seed.Components.GetAndRequire<GameLoop>().Loop();
-
-            SceneManager.Update(gameTime.ElapsedGameTime.Ticks);
             
-            
+            GameLoop.Update(gameTime);
 
             base.Update(gameTime);
         }
@@ -144,15 +159,11 @@ namespace Faseway.GameLibrary.TestGame.Game
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.CornflowerBlue);
-
             // TODO: Add your drawing code here
 
-            SceneManager.Draw();
+            GraphicsDevice.Clear(Color.CornflowerBlue);
 
-            spriteBatch.Begin();
-            spriteBatch.Draw(cursorTex, new Rectangle((int)cursorPos.X, (int)cursorPos.Y, 20, 27), new Rectangle(364, 450, 20, 27), Color.White);
-            spriteBatch.End();
+            GameLoop.Draw(gameTime);
 
             base.Draw(gameTime);
         }

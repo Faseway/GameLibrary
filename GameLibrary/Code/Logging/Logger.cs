@@ -23,6 +23,22 @@ namespace Faseway.GameLibrary.Logging
         /// Gets the base directory of the <see cref="Faseway.GameLibrary.Logging.Logger"/>.
         /// </summary>
         public static string BaseDirectory { get; private set; }
+        /// <summary>
+        /// Gets a catched log.
+        /// </summary>
+        public static string CatchedLog
+        {
+            get
+            {
+                var logger = (ConsoleLogger)GetLogger("CONSOLE");
+                if (logger != null)
+                {
+                    return logger.CatchedLog.ToString();
+                }
+
+                return string.Empty;
+            }
+        }
 
         // Constants
         public const string FILE_LOG = "FileLog.txt";

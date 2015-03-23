@@ -42,6 +42,7 @@
     <Compile Include="Components\ComponentManager.cs" />
     <Compile Include="Components\IComponent.cs" />
     <Compile Include="Components\MissingComponentException.cs" />
+    <Compile Include="Content\Cursor.cs" />
     <Compile Include="Content\ResourceSystem.cs" />
     <Compile Include="Copyright.cs" />
     <Compile Include="Extra\Extensions.cs" />
@@ -59,6 +60,8 @@
     <Compile Include="Game\GameLoop.cs" />
     <Compile Include="Game\Handlers\IDrawHandler.cs" />
     <Compile Include="Game\Handlers\IGameHandler.cs" />
+    <Compile Include="Game\Handlers\ISortableDrawHandler.cs" />
+    <Compile Include="Game\Handlers\ISortableUpdateHandler.cs" />
     <Compile Include="Game\Handlers\IUpdateHandler.cs" />
     <Compile Include="Game\Scenes\Scene.cs" />
     <Compile Include="Game\Scenes\SceneContainer.cs" />
@@ -78,11 +81,12 @@
     <Compile Include="MsgBoxIcon.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Rendering\Graphics2D.cs" />
-    <Compile Include="Rendering\SpriteSheet.cs" />
+    <Compile Include="Rendering\TextureSheet.cs" />
     <Compile Include="UI\Base\TextAlignment.cs" />
     <Compile Include="UI\Events\KeyEventArgs.cs" />
     <Compile Include="UI\Events\MouseEventArgs.cs" />
     <Compile Include="UI\Events\PaintEventArgs.cs" />
+    <Compile Include="UI\Events\RefreshEventArgs.cs" />
     <Compile Include="UI\WidgetState.cs" />
     <Compile Include="Components\XnaReference.cs" />
     <Compile Include="Scripting\CommandRestriction.cs" />
@@ -99,6 +103,7 @@
     <Compile Include="UI\WidgetContainer.cs" />
     <Compile Include="UI\Widgets\Box.cs" />
     <Compile Include="UI\Widgets\Button.cs" />
+    <Compile Include="UI\Widgets\DebugWindow.cs" />
     <Compile Include="UI\Widgets\Frame.cs" />
     <Compile Include="UI\Widgets\Label.cs" />
   </ItemGroup>
@@ -106,10 +111,15 @@
     <Reference Include="Microsoft.Xna.Framework, Version=4.0.0.0, Culture=neutral, PublicKeyToken=842cf8be1de50553, processorArchitecture=x86">
       <Private>False</Private>
     </Reference>
+    <Reference Include="Microsoft.Xna.Framework.Game, Version=4.0.0.0, Culture=neutral, PublicKeyToken=842cf8be1de50553, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\Program Files (x86)\Microsoft XNA\XNA Game Studio\v4.0\References\Windows\x86\Microsoft.Xna.Framework.Game.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Xna.Framework.Graphics, Version=4.0.0.0, Culture=neutral, PublicKeyToken=842cf8be1de50553, processorArchitecture=x86">
       <Private>False</Private>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.XML" />
     <Reference Include="System.Xml.Linq" />

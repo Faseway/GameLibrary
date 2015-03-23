@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.GamerServices;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 
@@ -49,6 +50,13 @@ namespace Faseway.GameLibrary.UI
         public Graphics2D Graphics2D 
         {
             get { return Seed.Components.GetAndRequire<Graphics2D>(); }
+        }
+        /// <summary>
+        /// Gets the window.
+        /// </summary>
+        public GameWindow Window
+        {
+            get { return Seed.Components.GetAndRequire<Graphics2D>().Window; }
         }
 
         // Constructor
@@ -106,18 +114,20 @@ namespace Faseway.GameLibrary.UI
 
         /// <summary>
         /// Updates all widgets.
+        /// <param name="gameTime">Provides a snapshot of timing values.</param>
         /// </summary>
-        public virtual void Update(float elapsed)
+        public virtual void Update(GameTime gameTime)
         {
-            Widgets.ForEach(widget => widget.Update(elapsed));
+            Widgets.ForEach(widget => widget.Update(gameTime));
         }
 
         /// <summary>
         /// Draws all widgets.
+        /// <param name="gameTime">Provides a snapshot of timing values.</param>
         /// </summary>
-        public virtual void Draw()
+        public virtual void Draw(GameTime gameTime)
         {
-            Widgets.ForEach(widget => widget.Draw());
+            Widgets.ForEach(widget => widget.Draw(gameTime));
         }
     }
 }

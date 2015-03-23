@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework.Graphics;
 
 using Faseway.GameLibrary.Rendering;
+using Faseway.GameLibrary.UI.Events;
 
 namespace Faseway.GameLibrary.UI.Widgets
 {
@@ -23,7 +24,7 @@ namespace Faseway.GameLibrary.UI.Widgets
         }
 
         // Methods
-        protected override void OnPaint()
+        protected override void OnPaint(PaintEventArgs e)
         {
             _spriteBatch.Begin();
             _spriteBatch.Draw(Graphics2D.Pixel, new Rectangle((int)Position.X, (int)Position.Y, (int)Size.X, (int)Size.Y), Color);

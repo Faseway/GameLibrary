@@ -26,6 +26,10 @@ namespace Faseway.GameLibrary.Logging
         /// Gets the <see cref="Faseway.GameLibrary.Logging.LoggerType"/> of the <see cref="Faseway.GameLibrary.Logging.ILogger"/>.
         /// </summary>
         public LoggerType Type { get { return _type; } }
+        /// <summary>
+        /// Gets a catched log.
+        /// </summary>
+        public StringBuilder CatchedLog { get; private set; }
 
         // Constructor
         /// <summary>
@@ -37,6 +41,8 @@ namespace Faseway.GameLibrary.Logging
             _type = LoggerType.Console;
             _lock = new object();
             _name = name;
+
+            CatchedLog = new StringBuilder();
         }
 
         // Methods
@@ -53,6 +59,8 @@ namespace Faseway.GameLibrary.Logging
                 //Console.Out.WriteLine("[{0}] > {1}", DateTime.Now.ToString("dd/MM HH:mm:ss"), value);
                 Console.Out.WriteLine(value);
                 Console.Out.Flush();
+
+                CatchedLog.AppendLine(value.ToString());
             }
         }
 

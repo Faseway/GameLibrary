@@ -1,5 +1,6 @@
 ﻿using Faseway.GameLibrary.Game.Handlers;
 using Faseway.GameLibrary.Logging;
+using Microsoft.Xna.Framework;
 
 namespace Faseway.GameLibrary.Game.Env
 {
@@ -48,12 +49,20 @@ namespace Faseway.GameLibrary.Game.Env
             Logger.Log("Weather effect {0} {1}", effect, enablement ? "enabled" : "disabled");
         }
 
-        public void Update(float elapsed)
+        /// <summary>
+        /// Called when the game should be updated.
+        /// </summary>
+        /// <param name="gameTime">Provides a snapshot of timing values.</param>
+        public void Update(GameTime gameTime)
         {
             throw new System.NotImplementedException();
         }
 
-        public void Draw()
+        /// <summary>
+        /// Called when the game should be rendered.
+        /// </summary>
+        /// <param name="gameTime">Provides a snapshot of timing values.</param>
+        public void Draw(GameTime gameTime)
         {
             throw new System.NotImplementedException();
         }

@@ -4,12 +4,15 @@ using Microsoft.Xna.Framework.Graphics;
 
 using Faseway.GameLibrary.UI;
 using Faseway.GameLibrary.UI.Base;
+using Faseway.GameLibrary.UI.Events;
 
 namespace Faseway.GameLibrary.UI.Widgets
 {
     public class Label : Widget
     {
         // Properties
+        public bool ShadowEnabled { get; set; }
+
         public string Text { get; set; }
 
         public Color ForeColor { get; set; }
@@ -27,12 +30,13 @@ namespace Faseway.GameLibrary.UI.Widgets
             
             ForeColor = Color.White;
             ShadowColor = new Color(67, 67, 74, 255);
+            ShadowEnabled = true;
 
             TextAlignment = TextAlignment.Middle;
         }
 
         // Methods
-        protected override void OnPaint()
+        protected override void OnPaint(PaintEventArgs e)
         {
             if (!string.IsNullOrEmpty(Text) && Font != null)
             {
@@ -57,7 +61,12 @@ namespace Faseway.GameLibrary.UI.Widgets
                 }
 
                 Graphics2D.SpriteBatch.Begin();
-                Graphics2D.SpriteBatch.DrawString(Font, Text, new Vector2(Position.X + 1, Position.Y + 1), ShadowColor);
+
+                if (ShadowEnabled)
+                {
+                    Graphics2D.SpriteBatch.DrawString(Font, Text, new Vector2(Position.X + 1, Position.Y + 1), ShadowColor);
+                }
+
                 Graphics2D.SpriteBatch.DrawString(Font, Text, Position, ForeColor);
 
                 //Graphics2D.SpriteBatch.DrawString(Font, Text, Position, ForeColor, 0.0f, _spriteFont.MeasureString(Text) / 2, 1.0f, SpriteEffects.None, 0.5f);

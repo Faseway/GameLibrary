@@ -11,6 +11,7 @@ using Faseway.GameLibrary.Game.Scenes;
 using Faseway.GameLibrary.Logging;
 using Faseway.GameLibrary.UI;
 using Faseway.GameLibrary.UI.Widgets;
+using Microsoft.Xna.Framework.Input;
 
 namespace Faseway.GameLibrary.TestGame.Game.Scenes
 {
@@ -96,16 +97,21 @@ namespace Faseway.GameLibrary.TestGame.Game.Scenes
             };
             btn.MouseUp += (s, e) => { Seed.Components.Get<TestGame>().Exit(); };
 
+            new DebugWindow(_container)
+            {
+                Name = "DebugWindow"
+            };
+
             _spriteBatch = new SpriteBatch(Graphics);
             _spriteTexture = Content.Load<Texture2D>("Textures\\Objects");
 
             IsLoaded = true;
         }
 
-        public override void Update(float elapsed)
+        public override void Update(GameTime gameTime)
         {
-            _container.Update(elapsed);
-
+            _container.Update(gameTime);
+            
             _container.Get<Label>(3).Text = string.Format(
                 "Faseway Game Library\nVersion: {0}\nBuild: {1}\nFrameIndex: {2:000000}\nFrameRate: {3}\nMousePosition: {4}\nMouseState: {5}",
                 Seed.Version,
@@ -115,19 +121,18 @@ namespace Faseway.GameLibrary.TestGame.Game.Scenes
                 new Vector2(Mouse.X, Mouse.Y),
                 Mouse.LeftButton);
 
-            base.Update(elapsed);
+            base.Update(gameTime);
         }
 
-        public override void Draw()
+        public override void Draw(GameTime gameTime)
         {
-            _container.Draw();
-
             _spriteBatch.Begin();
             _spriteBatch.Draw(_spriteTexture, new Vector2(5, 150), Color.White);
             //_spriteBatch.Draw(_spriteTexture, new Vector2(5, 5), new Rectangle(0, 0, 54, 54), Color.White);
             _spriteBatch.End();
 
-            base.Draw();
+            _container.Draw(gameTime);
+            base.Draw(gameTime);
         }
     }
 }

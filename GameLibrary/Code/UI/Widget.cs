@@ -278,11 +278,11 @@ namespace Faseway.GameLibrary.UI
         /// <summary>
         /// Occurs when the widget is updated.
         /// </summary>
-        public event EventHandler Refresh;
+        public event EventHandler<RefreshEventArgs> Refresh;
         /// <summary>
         /// Occurs when the widget is redrawn.
         /// </summary>
-        public event EventHandler Paint;
+        public event EventHandler<PaintEventArgs> Paint;
 
         // Constructor
         /// <summary>
@@ -335,10 +335,14 @@ namespace Faseway.GameLibrary.UI
         }
 
         /// <summary>
-        /// Updates the widget.
+        /// Called when the game should be updated.
         /// </summary>
-        public override void Update(float elapsed)
+        /// <param name="gameTime">Provides a snapshot of timing values.</param>
+        public override void Update(GameTime gameTime)
         {
+            _currentMouse = Mouse.GetState();
+            _currentKeyboard = Keyboard.GetState();
+
             if (Enabled)
             {
                 //if (_dirty)
@@ -346,9 +350,6 @@ namespace Faseway.GameLibrary.UI
                 //    OnCreateWidget();
                 //    _dirty = false;
                 //}
-
-                _currentMouse = Mouse.GetState();
-                _currentKeyboard = Keyboard.GetState();
 
                 MouseEventArgs mouseEvent = new MouseEventArgs(new Vector2(_currentMouse.X, _currentMouse.Y), _currentMouse);
 
@@ -410,28 +411,38 @@ namespace Faseway.GameLibrary.UI
                     _mouseDown = false;
                     _mouseUp = false;
                 }
-
-                _lastMouse = _currentMouse;
-                _lastKeyboard = _currentKeyboard;
                 
-                Widgets.ForEach(widget => widget.Update(elapsed));
+                Widgets.ForEach(widget => widget.Update(gameTime));
             }
             else
             {
                 State = WidgetState.Disabled;
             }
-            OnRefresh();
+
+            if (_lastKeyboard.GetPressedKeys().Length != _currentKeyboard.GetPressedKeys().Length)
+            {
+                foreach (var key in _currentKeyboard.GetPressedKeys())
+                {
+                    OnKeyPress(new KeyEventArgs(_currentKeyboard, key, KeyState.Down));
+                }
+            }
+
+            _lastMouse = _currentMouse;
+            _lastKeyboard = _currentKeyboard;
+
+            OnRefresh(new RefreshEventArgs(gameTime));
         }
 
         /// <summary>
-        /// Draws the widget.
+        /// Called when the game should be rendered.
         /// </summary>
-        public override void Draw()
+        /// <param name="gameTime">Provides a snapshot of timing values.</param>
+        public override void Draw(GameTime gameTime)
         {
             if (Visible)
             {
-                OnPaint();
-                Widgets.ForEach(widget => widget.Draw());
+                OnPaint(new PaintEventArgs(Graphics, gameTime));
+                Widgets.ForEach(widget => widget.Draw(gameTime));
             }
         }
 
@@ -506,14 +517,14 @@ namespace Faseway.GameLibrary.UI
             KeyPress.SafeInvoke(this, e);
         }
 
-        protected virtual void OnRefresh()
+        protected virtual void OnRefresh(RefreshEventArgs e)
         {
-            Refresh.SafeInvoke(this, EventArgs.Empty);
+            Refresh.SafeInvoke(this, e);
         }
 
-        protected virtual void OnPaint()
+        protected virtual void OnPaint(PaintEventArgs e)
         {
-            Paint.SafeInvoke(this, EventArgs.Empty);
+            Paint.SafeInvoke(this, e);
         }
     }
 }
