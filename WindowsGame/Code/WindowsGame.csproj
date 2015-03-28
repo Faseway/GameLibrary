@@ -108,7 +108,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Game\Scenes\DummyScene.cs" />
+    <Compile Include="Game\Scenes\GooeyTestScene.cs" />
     <Compile Include="Game\Scenes\TestScene.cs" />
+    <Compile Include="Game\Scenes\WorldScene.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Game\TestGame.cs" />

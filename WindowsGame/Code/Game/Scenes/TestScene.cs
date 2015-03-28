@@ -61,13 +61,14 @@ namespace Faseway.GameLibrary.TestGame.Game.Scenes
             };
             new Label(_container)
             {
-                Position = new Vector2(5, 5)
+                Position = new Vector2(5, 5),
+                TextAlignment = UI.Base.TextAlignment.None
             };
 
             var btn = new Button(_container)
             {
                 Position = new Vector2(300, 5),
-                Size = new Vector2(100, 20),
+                Size = new Vector2(100, 25),
                 Text = "Button"
             };
             btn.MouseUp += (s, e) => { _container.Get("ButtonPlayMusic").Enabled = !_container.Get("ButtonPlayMusic").Enabled; };
@@ -75,7 +76,7 @@ namespace Faseway.GameLibrary.TestGame.Game.Scenes
             btn = new Button(_container)
             {
                 Position = new Vector2(410, 5),
-                Size = new Vector2(100, 20),
+                Size = new Vector2(100, 25),
                 Text = "Play Music",
                 Name = "ButtonPlayMusic"
             };
@@ -83,7 +84,7 @@ namespace Faseway.GameLibrary.TestGame.Game.Scenes
             btn = new Button(_container)
             {
                 Position = new Vector2(410, 30),
-                Size = new Vector2(100, 20),
+                Size = new Vector2(100, 25),
                 Text = "Stop Music",
                 Name = "ButtonStopMusic"
             };
@@ -92,10 +93,17 @@ namespace Faseway.GameLibrary.TestGame.Game.Scenes
             btn = new Button(_container)
             {
                 Position = new Vector2(520, 5),
-                Size = new Vector2(100, 20),
+                Size = new Vector2(100, 25),
                 Text = "Exit"
             };
             btn.MouseUp += (s, e) => { Seed.Components.Get<TestGame>().Exit(); };
+            btn = new Button(_container)
+            {
+                Position = new Vector2(520, 30),
+                Size = new Vector2(100, 25),
+                Text = "World"
+            };
+            btn.Click += (s, e) => { ChangeScene(SceneManager.GetScene<WorldScene>()); };
 
             new DebugWindow(_container)
             {

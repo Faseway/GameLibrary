@@ -21,6 +21,7 @@ using Faseway.GameLibrary.UI.Widgets;
 
 using Faseway.GameLibrary.TestGame.Game.Scenes;
 using Faseway.GameLibrary.Rendering;
+using Faseway.GameLibrary.Serialization;
 
 namespace Faseway.GameLibrary.TestGame.Game
 {
@@ -78,19 +79,20 @@ namespace Faseway.GameLibrary.TestGame.Game
             // link
             Reference.Link(Content);
             Reference.Link(GraphicsDevice);
+
             Seed.Components.Install(new Graphics2D(GraphicsDevice));
             Seed.Components.Get<Graphics2D>().Window = Window;
-
-            //var reference = Reference.Get<GraphicsDevice>();
-            //var reference2 = Reference.Get<GraphicsAdapter>();
 
             // game loop
             GameLoop.Subscribe(Cursor);
             GameLoop.Subscribe(SceneManager);
 
             // install scenes
-            SceneManager.Add(new TestScene());
-
+            //SceneManager.Add(new DummyScene());
+            //SceneManager.Add(new TestScene());
+            //SceneManager.Add(new WorldScene());
+            SceneManager.Add(new GooeyTestScene());
+            
             base.Initialize();
         }
 
