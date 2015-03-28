@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Microsoft.Xna.Framework;
 
 namespace Faseway.GameLibrary.Extra
 {
@@ -34,6 +35,16 @@ namespace Faseway.GameLibrary.Extra
             {
                 handler.Invoke(sender, e);
             }
+        }
+
+        /// <summary>
+        /// TODO
+        /// </summary>
+        /// <param name="vector"></param>
+        /// <returns></returns>
+        public static Vector2 Floor(this Vector2 vector)
+        {
+            return new Vector2((int)vector.X, (int)vector.Y);
         }
     }
 }

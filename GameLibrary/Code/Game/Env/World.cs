@@ -27,6 +27,10 @@ namespace Faseway.GameLibrary.Game.Env
         /// Gets the camera.
         /// </summary>
         public Camera Camera { get; private set; }
+        /// <summary>
+        /// Gets the map.
+        /// </summary>
+        public Map Map { get; private set; }
 
         // Constructor
         /// <summary>
@@ -38,7 +42,9 @@ namespace Faseway.GameLibrary.Game.Env
 
             Weather = new Weather();
 
-            Camera = new Camera();
+            Camera = new Camera(this);
+
+            Map = new Map("TestMap");
         }
 
         // Methods
@@ -50,6 +56,12 @@ namespace Faseway.GameLibrary.Game.Env
         {
             Weather.Update(gameTime);
             Camera.Update(gameTime);
+            Map.Update(gameTime);
+
+            foreach (var entity in Environment)
+            {
+                entity.Update(gameTime);
+            }
         }
 
         /// <summary>
@@ -58,7 +70,12 @@ namespace Faseway.GameLibrary.Game.Env
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         public void Draw(GameTime gameTime)
         {
-            throw new NotImplementedException();
+            Map.Draw(gameTime);
+
+            foreach (var entity in Environment)
+            {
+                entity.Draw(gameTime);
+            }
         }
     }
 }
