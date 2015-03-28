@@ -3,12 +3,18 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
+using Microsoft.Xna.Framework;
+
+using Faseway.GameLibrary.Game.Entities;
+using Faseway.GameLibrary.Game.Entities.Components;
+using Faseway.GameLibrary.Game.Handlers;
+
 namespace Faseway.GameLibrary.Game.Entities
 {
     /// <summary>
     /// Represents an entity.
     /// </summary>
-    public class Entity
+    public class Entity : IGameHandler
     {
         // Properties
         /// <summary>
@@ -34,6 +40,26 @@ namespace Faseway.GameLibrary.Game.Entities
         /// </summary>
         public EntityEnvironment Environment { get; private set; }
 
+        /// <summary>
+        /// Gets a collection of all entity components.
+        /// </summary>
+        public List<EntityComponent> Components { get; private set; }
+
+        /// <summary>
+        /// Gets or sets the position.
+        /// </summary>
+        public TransformComponent Transform
+        {
+            get { return GetComponent<TransformComponent>(); }
+        }
+        /// <summary>
+        /// Gets or sets the rendering.
+        /// </summary>
+        public RenderComponent Rendering
+        {
+            get { return GetComponent<RenderComponent>(); }
+        }
+
         // Constructor
         /// <summary>
         /// Initializes a new instance of the <see cref="Faseway.GameLibrary.Game.Entities.Entity"/> class.
@@ -43,7 +69,12 @@ namespace Faseway.GameLibrary.Game.Entities
             IsEnabled = true;
             IsVisible = true;
 
+            Components = new List<EntityComponent>();
+            AddComponent(new TransformComponent());
+            AddComponent(new RenderComponent());
+
             Environment = environment;
+            Environment.Add(this);
         }
 
         // Methods
@@ -78,5 +109,81 @@ namespace Faseway.GameLibrary.Game.Entities
         {
             IsVisible = false;
         }
+
+        #region Entity Component Implementation
+
+        /// <summary>
+        /// Adds the specified component.
+        /// </summary>
+        /// <param name="component">The component.</param>
+        public void AddComponent(EntityComponent component)
+        {
+            component.AttachToEntity(this);
+        }
+
+        /// <summary>
+        /// Removes the specified component.
+        /// </summary>
+        /// <param name="component">The component.</param>
+        public void RemoveComponent(EntityComponent component)
+        {
+            if (Components.Contains(component))
+            {
+                component.DetachFromEntity();
+            }
+        }
+
+        /// <summary>
+        /// Gets the component of the specified type.
+        /// </summary>
+        /// <param name="type">The type.</param>
+        public EntityComponent GetComponent(Type type)
+        {
+            return Components.FirstOrDefault(type.IsInstanceOfType);
+        }
+
+        /// <summary>
+        /// Gets a specific component by a specified type.
+        /// </summary>
+        public T GetComponent<T>() where T : EntityComponent
+        {
+            return Components.FirstOrDefault(component => component is T) as T;
+        }
+
+        #endregion
+
+        #region IGameHandler Implementation
+
+        /// <summary>
+        /// Called when the game should be updated.
+        /// </summary>
+        /// <param name="gameTime">Provides a snapshot of timing values.</param>
+        public void Update(GameTime gameTime)
+        {
+            if (IsEnabled)
+            {
+                foreach (var component in Components)
+                {
+                    component.Update(gameTime);
+                }
+            }
+        }
+
+        /// <summary>
+        /// Called when the game should be rendered.
+        /// </summary>
+        /// <param name="gameTime">Provides a snapshot of timing values.</param>
+        public void Draw(GameTime gameTime)
+        {
+            if (IsEnabled && IsVisible)
+            {
+                foreach (var component in Components)
+                {
+                    component.Draw(gameTime);
+                }
+            }
+        }
+
+        #endregion
     }
 }
