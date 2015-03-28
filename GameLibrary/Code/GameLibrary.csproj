@@ -50,10 +50,15 @@
     <Compile Include="Game\Campaigns\Campaign.cs" />
     <Compile Include="Game\Campaigns\Objective.cs" />
     <Compile Include="Game\Campaigns\ObjectiveChangedEventArgs.cs" />
+    <Compile Include="Game\Entities\Components\EntityComponent.cs" />
+    <Compile Include="Game\Entities\Components\RenderComponent.cs" />
+    <Compile Include="Game\Entities\Components\TransformComponent.cs" />
     <Compile Include="Game\Entities\Entity.cs" />
+    <Compile Include="Game\Entities\EntityController.cs" />
     <Compile Include="Game\Entities\EntityEnvironment.cs" />
     <Compile Include="Game\Entities\EntityFactory.cs" />
     <Compile Include="Game\Env\Camera.cs" />
+    <Compile Include="Game\Env\Map.cs" />
     <Compile Include="Game\Env\Weather.cs" />
     <Compile Include="Game\Env\World.cs" />
     <Compile Include="Game\Game.cs" />
@@ -81,7 +86,11 @@
     <Compile Include="MsgBoxIcon.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Rendering\Graphics2D.cs" />
+    <Compile Include="Rendering\Font\Extension.cs" />
+    <Compile Include="Rendering\SpriteSheet.cs" />
     <Compile Include="Rendering\TextureSheet.cs" />
+    <Compile Include="Serialization\SpriteSheetSerializer.cs" />
+    <Compile Include="UI\Base\ScrollBar.cs" />
     <Compile Include="UI\Base\TextAlignment.cs" />
     <Compile Include="UI\Events\KeyEventArgs.cs" />
     <Compile Include="UI\Events\MouseEventArgs.cs" />
@@ -106,6 +115,8 @@
     <Compile Include="UI\Widgets\DebugWindow.cs" />
     <Compile Include="UI\Widgets\Frame.cs" />
     <Compile Include="UI\Widgets\Label.cs" />
+    <Compile Include="UI\Widgets\TextBox.cs" />
+    <Compile Include="UI\Widgets\Window.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Microsoft.Xna.Framework, Version=4.0.0.0, Culture=neutral, PublicKeyToken=842cf8be1de50553, processorArchitecture=x86">

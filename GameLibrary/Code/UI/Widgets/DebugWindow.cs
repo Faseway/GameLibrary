@@ -17,13 +17,18 @@ namespace Faseway.GameLibrary.UI.Widgets
 {
     public class DebugWindow : Widget
     {
+        // Variables
+        private ScrollBar _scrollbar;
+
         // Properties
         public StringBuilder Builder { get; set; }
+        public SpriteFont Font { get; set; }
 
         // Constructor
         public DebugWindow(WidgetContainer container)
             : base(container)
         {
+            Font = Content.Load<SpriteFont>("Data\\Fonts\\D10");
         }
 
         // Methods
@@ -34,6 +39,12 @@ namespace Faseway.GameLibrary.UI.Widgets
             Visible = false;
 
             Builder = new StringBuilder();
+
+            _scrollbar = new ScrollBar(this)
+            {
+                Position = new Vector2(Window.ClientBounds.Width - 31, 10),
+                ScrollbarHeight = Window.ClientBounds.Height - 70
+            };
 
             base.OnLoad();
         }
@@ -54,11 +65,12 @@ namespace Faseway.GameLibrary.UI.Widgets
         protected override void OnPaint(PaintEventArgs e)
         {
             Graphics2D.SpriteBatch.Begin();
-            
-            Graphics2D.SpriteBatch.Draw(Graphics2D.Pixel, new Rectangle(10, 10, Window.ClientBounds.Width - 20, Window.ClientBounds.Height - 70), BackColor);
-            Graphics2D.SpriteBatch.Draw(Graphics2D.Pixel, new Rectangle(10, Window.ClientBounds.Height - 50, Window.ClientBounds.Width - 20, 40), BackColor);
-            Graphics2D.SpriteBatch.DrawString(Graphics2D.Font, Logger.CatchedLog, new Vector2(15, 15), Color.White);
-            Graphics2D.SpriteBatch.DrawString(Graphics2D.Font, Builder.ToString(), new Vector2(15, Window.ClientBounds.Height - 45), Color.White);
+
+            var width = Window.ClientBounds.Width - 20;
+            Graphics2D.SpriteBatch.Draw(Graphics2D.Pixel, new Rectangle(10, 10, width, Window.ClientBounds.Height - 70), BackColor);
+            Graphics2D.SpriteBatch.Draw(Graphics2D.Pixel, new Rectangle(10, Window.ClientBounds.Height - 50, width, 40), BackColor);
+            Graphics2D.SpriteBatch.DrawString(Font, Font.Wrap(Logger.CatchedLog, width), new Vector2(15, 15), Color.White);
+            Graphics2D.SpriteBatch.DrawString(Font, Builder.ToString(), new Vector2(15, Window.ClientBounds.Height - 45), Color.White);
             
             Graphics2D.SpriteBatch.End();
 

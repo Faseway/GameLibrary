@@ -366,6 +366,10 @@ namespace Faseway.GameLibrary.UI
                     _mouseDown = false;
                     _mouseUp = false;
                 }
+                if (_containsMouse && mouseIn)
+                {
+                    OnMouseMove(mouseEvent);
+                }
 
                 _containsMouse = mouseIn;
 
