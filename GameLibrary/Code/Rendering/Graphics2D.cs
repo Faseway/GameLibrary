@@ -8,6 +8,8 @@ using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 
 using Faseway.GameLibrary.Components;
+using Faseway.GameLibrary.Extra;
+using Faseway.GameLibrary.Game.Env;
 
 
 namespace Faseway.GameLibrary.Rendering
@@ -36,6 +38,14 @@ namespace Faseway.GameLibrary.Rendering
         /// </summary>
         public GameWindow Window { get; set; }
 
+        /// <summary>
+        /// Gets the viewport center.
+        /// </summary>
+        public Vector2 Center 
+        {
+            get { return new Vector2(GraphicsDevice.Viewport.Width / 2, GraphicsDevice.Viewport.Height / 2); }
+        }
+
         // Constructor
         /// <summary>
         /// Initializes a new instance of the <see cref="Faseway.GameLibrary.Rendering.Graphics2D"/> class.
@@ -59,6 +69,23 @@ namespace Faseway.GameLibrary.Rendering
                 MsgBox.Show(MsgBoxIcon.Error, "Graphics2D::Initialize", "Could not initialize Graphics2D");
                 throw ex;
             }
+        }
+
+        // Methods
+        public void DrawTexture(Texture2D texture, Vector2 position, Rectangle source, Color color)
+        {
+            var camera = Seed.Components.GetAndRequire<Camera>();
+
+            SpriteBatch.Begin(SpriteSortMode.Texture, null, null, null, null, null, camera.Transformation); // Matrix.CreateTranslation(20, 0, 0)
+            SpriteBatch.Draw(texture, position, source, color);
+            SpriteBatch.End();
+        }
+
+        public void DrawLine(Vector2 start, Vector2 end, Color color)
+        {
+            //SpriteBatch.Begin();
+            SpriteBatch.Draw(Pixel, new Rectangle((int)start.X, (int)start.Y, (int)end.X, 1), color);
+            //SpriteBatch.End();
         }
     }
 }
