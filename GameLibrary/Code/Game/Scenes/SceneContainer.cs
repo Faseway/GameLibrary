@@ -10,6 +10,9 @@ using Microsoft.Xna.Framework.Input;
 using Faseway.GameLibrary.Components;
 using Faseway.GameLibrary.Logging;
 using Faseway.GameLibrary.Game.Handlers;
+using Faseway.GameLibrary.UI;
+using Faseway.GameLibrary.UI.Events;
+using Faseway.GameLibrary.UI.Widgets;
 
 namespace Faseway.GameLibrary.Game.Scenes
 {
@@ -51,6 +54,10 @@ namespace Faseway.GameLibrary.Game.Scenes
         {
             get { return Microsoft.Xna.Framework.Input.Keyboard.GetState(); }
         }
+        /// <summary>
+        /// Gets the widget container.
+        /// </summary>
+        protected WidgetContainer WidgetContainer { get; private set; }
 
         // Constructors
         /// <summary>
@@ -59,6 +66,7 @@ namespace Faseway.GameLibrary.Game.Scenes
         protected SceneContainer()
         {
             Scenes = new List<Scene>();
+            WidgetContainer = new WidgetContainer();
         }
 
         // Methods
@@ -74,6 +82,11 @@ namespace Faseway.GameLibrary.Game.Scenes
             scene.OnEnter();
 
             Scenes.Add(scene);
+            if (Scenes.Count == 1)
+            {
+                scene.IsPaused = false;
+                scene.IsVisible = true;
+            }
         }
 
         /// <summary>
@@ -139,6 +152,7 @@ namespace Faseway.GameLibrary.Game.Scenes
                     scene.Update(gameTime);
                 }
             }
+            WidgetContainer.Update(gameTime);
         }
 
         /// <summary>
@@ -150,6 +164,7 @@ namespace Faseway.GameLibrary.Game.Scenes
             {
                 scene.Draw(gameTime);
             }
+            WidgetContainer.Draw(gameTime);
         }
     }
 }

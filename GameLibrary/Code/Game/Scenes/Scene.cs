@@ -61,7 +61,8 @@ namespace Faseway.GameLibrary.Game.Scenes
         /// </summary>
         protected Scene()
         {
-            IsVisible = true;
+            IsPaused = true;
+            IsVisible = false;
         }
 
         // Methods
@@ -73,6 +74,17 @@ namespace Faseway.GameLibrary.Game.Scenes
         {
             SceneManager.Add(scene);
             Remove();
+            scene.IsPaused = false;
+            scene.IsVisible = true;
+        }
+
+        protected void ChangeScene(Scene scene)
+        {
+            this.IsPaused = true;
+            this.IsVisible = false;
+
+            scene.IsPaused = false;
+            scene.IsVisible = true;
         }
 
         /// <summary>
