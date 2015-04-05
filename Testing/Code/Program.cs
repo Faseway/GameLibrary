@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 
@@ -12,9 +13,10 @@ using Faseway.GameLibrary.Logging;
 using Faseway.GameLibrary.Scripting;
 using Faseway.GameLibrary.Serialization;
 using Faseway.GameLibrary.Localization;
+using Faseway.GameLibrary.Network;
+using Faseway.GameLibrary.Network.Packets;
 using Faseway.GameLibrary.UI;
 using Faseway.GameLibrary.UI.Widgets;
-using System.IO;
 
 namespace Faseway.GameLibrary.Testing
 {
@@ -44,31 +46,39 @@ namespace Faseway.GameLibrary.Testing
 
             Console.WriteLine(Seed.Components.GetAndRequire<LocalizationManager>().Get("common", "welcome"));
 
-            using (var game = new Game.Game())
-            {
-                game.Environment.Add(game.Environment.Factory.Create());
-                game.Environment.Add(game.Environment.Factory.Create());
-                game.Environment.Add(game.Environment.Factory.Create());
+            //using (var game = new Game.Game())
+            //{
+            //    game.Environment.Add(game.Environment.Factory.Create());
+            //    game.Environment.Add(game.Environment.Factory.Create());
+            //    game.Environment.Add(game.Environment.Factory.Create());
 
-                game.Campaign = new Game.Campaigns.Campaign();
-                game.Campaign.AddObjective("OBJ_EAT_TOAST");
-                game.Campaign.AddObjective("OBJ_HAVE_FUN");
-                game.Campaign.AddObjective("OBJ_KILL_RUFFY");
+            //    game.Campaign = new Game.Campaigns.Campaign();
+            //    game.Campaign.AddObjective("OBJ_EAT_TOAST");
+            //    game.Campaign.AddObjective("OBJ_HAVE_FUN");
+            //    game.Campaign.AddObjective("OBJ_KILL_RUFFY");
 
-                game.Campaign.SetObjectiveAccomplished("OBJ_KILL_RUFFY", true);
+            //    game.Campaign.SetObjectiveAccomplished("OBJ_KILL_RUFFY", true);
 
-                Logger.Log("Campaign objectives : {0} (Accomplished : {1} Remaining : {2})", game.Campaign.ObjectiveNum, game.Campaign.ObjectivesAccomplishedNum, game.Campaign.ObjectivesNotAccomplishedNum);
+            //    Logger.Log("Campaign objectives : {0} (Accomplished : {1} Remaining : {2})", game.Campaign.ObjectiveNum, game.Campaign.ObjectivesAccomplishedNum, game.Campaign.ObjectivesNotAccomplishedNum);
 
-                game.Run();
-            }
+            //    game.Run();
+            //}
 
-            var container = new WidgetContainer();
-            var widget = new Frame(container);
-            new Box(widget);
-            new Label(widget);
+            //var container = new WidgetContainer();
+            //var widget = new Frame(container);
+            //new Box(widget);
+            //new Label(widget);
 
-            var serializer = new GooeySerializer();
-            serializer.Serialize(container, File.Open("Data//UI//Dummy.xml", FileMode.Create, FileAccess.Write));
+            //var serializer = new GooeySerializer();
+            //serializer.Serialize(container, File.Open("Data//UI//Dummy.xml", FileMode.Create, FileAccess.Write));
+
+            var packet = new Packet();
+            packet.Header = 0x1000;
+            packet.Timestamp = Environment.TickCount;
+            packet.Buffer.Add(1);
+            packet.Buffer.Add("Dummy");
+
+            Console.WriteLine(packet.GetString());
 
             Console.Read();
         }
