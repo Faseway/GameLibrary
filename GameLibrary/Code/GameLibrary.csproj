@@ -84,7 +84,11 @@
     <Compile Include="Components\MissingReferenceException.cs" />
     <Compile Include="MsgBox.cs" />
     <Compile Include="MsgBoxIcon.cs" />
+    <Compile Include="Network\Client.cs" />
+    <Compile Include="Network\Events\ClientEventArgs.cs" />
     <Compile Include="Network\IConnection.cs" />
+    <Compile Include="Network\Events\PacketEventArgs.cs" />
+    <Compile Include="Network\Packets\PackageDirection.cs" />
     <Compile Include="Network\Packets\Packet.cs" />
     <Compile Include="Network\Packets\PacketSerializer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -140,7 +144,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Math\" />
-    <Folder Include="Network\Events\" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Xna.Framework.4.0">

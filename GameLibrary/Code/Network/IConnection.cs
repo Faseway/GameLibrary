@@ -6,5 +6,6 @@ namespace Faseway.GameLibrary.Network
 {
     public interface IConnection
     {
+        IPEndPoint EndPoint { get; }
     }
 }
