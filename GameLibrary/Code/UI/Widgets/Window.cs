@@ -23,6 +23,11 @@ namespace Faseway.GameLibrary.UI.Widgets
 
         public string Message { get; set; }
 
+        public Button AcceptButton 
+        {
+            get { return _buttonAccept; }
+        }
+
         // Constructor
         public Window(WidgetContainer container)
             : base(container)

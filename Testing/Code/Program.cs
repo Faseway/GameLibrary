@@ -67,7 +67,7 @@ namespace Faseway.GameLibrary.Testing
             new Box(widget);
             new Label(widget);
 
-            var serializer = new GooeySerializer();
+            var serializer = new UiSerializer();
             serializer.Serialize(container, File.Open("Data//UI//Dummy.xml", FileMode.Create, FileAccess.Write));
 
             Console.Read();

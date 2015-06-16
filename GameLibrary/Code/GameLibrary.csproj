@@ -43,6 +43,7 @@
     <Compile Include="Components\IComponent.cs" />
     <Compile Include="Components\MissingComponentException.cs" />
     <Compile Include="Content\Cursor.cs" />
+    <Compile Include="Content\Items\Item.cs" />
     <Compile Include="Content\ResourceSystem.cs" />
     <Compile Include="Copyright.cs" />
     <Compile Include="Extra\Extensions.cs" />
@@ -106,7 +107,7 @@
     <Compile Include="Scripting\ScriptCompiler.cs" />
     <Compile Include="Seed.cs" />
     <Compile Include="Serialization\ISerializer.cs" />
-    <Compile Include="Serialization\GooeySerializer.cs" />
+    <Compile Include="Serialization\UiSerializer.cs" />
     <Compile Include="UI\Base\IWidgetContainer.cs" />
     <Compile Include="UI\Widget.cs" />
     <Compile Include="UI\WidgetContainer.cs" />

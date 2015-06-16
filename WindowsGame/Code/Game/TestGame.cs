@@ -89,9 +89,9 @@ namespace Faseway.GameLibrary.TestGame.Game
 
             // install scenes
             //SceneManager.Add(new DummyScene());
-            //SceneManager.Add(new TestScene());
-            //SceneManager.Add(new WorldScene());
-            SceneManager.Add(new GooeyTestScene());
+            SceneManager.Add(new TestScene());
+            SceneManager.Add(new WorldScene());
+            //SceneManager.Add(new GooeyTestScene());
             
             base.Initialize();
         }

@@ -14,6 +14,7 @@ namespace Faseway.GameLibrary.UI.Widgets
         private Label _label;
         private SoundEffect _soundEffectHover;
         private SoundEffect _soundEffectClick;
+        private SpriteSheet _sheet;
 
         //private Texture2D _texture;
         //private Rectangle _textureRect;
@@ -26,6 +27,11 @@ namespace Faseway.GameLibrary.UI.Widgets
             set { _label.Text = value; }
         }
 
+        public bool HasImage 
+        {
+            get { return Image != null; }
+        }
+
         public Color ForeColor
         {
             get { return _label.ForeColor; }
@@ -36,6 +42,17 @@ namespace Faseway.GameLibrary.UI.Widgets
             get { return _label.ShadowColor; }
             set { _label.ShadowColor = value; }
         }
+
+        public Texture2D Image 
+        {
+            get { return _sheet.Texture; }
+            set { _sheet.Texture = value; } 
+        }
+
+        public Rectangle ImageNormal { get; set; }
+        public Rectangle ImageHovered { get; set; }
+        public Rectangle ImageClicked { get; set; }
+        public Rectangle ImageState { get; private set; }
 
         public SpriteFont Font
         {
@@ -53,6 +70,8 @@ namespace Faseway.GameLibrary.UI.Widgets
         public Button(WidgetContainer container)
             : base(container)
         {
+            _sheet = new SpriteSheet();
+
             BackColor = Color.DarkGray;
         }
 
@@ -110,6 +129,11 @@ namespace Faseway.GameLibrary.UI.Widgets
             {
                 case WidgetState.Hovered:
                     BackColor = Color.LightGray;
+
+                    if (HasImage)
+                    {
+                        ImageState = ImageHovered;
+                    }
                     break;
                 case WidgetState.Clicked:
                     BackColor = Color.DimGray;
@@ -120,6 +144,11 @@ namespace Faseway.GameLibrary.UI.Widgets
                     break;
                 default:
                     BackColor = Color.DarkGray;
+
+                    if (HasImage)
+                    {
+                        ImageState = ImageNormal;
+                    }
                     break;
             }
 
@@ -133,17 +162,23 @@ namespace Faseway.GameLibrary.UI.Widgets
         protected override void OnPaint(PaintEventArgs e)
         {
             //  Draw(Texture2D texture, Vector2 position, Rectangle? sourceRectangle, Color color, float rotation, Vector2 origin, Vector2 scale, SpriteEffects effects, float layerDepth);
-            
-            Graphics2D.SpriteBatch.Begin();
             //Graphics2D.SpriteBatch.Draw(_spriteSheet.Texture, Position, _textureRect, BackColor, 0.0f, Vector2.Zero, new Vector2(0.535f), SpriteEffects.None, 0.0f);
-
-            Graphics2D.SpriteBatch.Draw(Graphics2D.Pixel, Bounds, BackColor);
             //Graphics2D.DrawLine(ScreenPosition, new Vector2(Width, 0), new Color(27, 27, 27, 200));
             //Graphics2D.DrawLine(ScreenPosition, new Vector2(Width, Height), new Color(27, 27, 27, 200));
-
-            Graphics2D.SpriteBatch.End();
-
             //Graphics2D.SpriteBatch.Draw(Graphics2D.Pixel, new Rectangle((int)Position.X, (int)Position.Y, (int)Size.X, (int)Size.Y), BackColor);
+
+            Graphics2D.SpriteBatch.Begin();
+
+            if (HasImage)
+            {
+                Graphics2D.SpriteBatch.Draw(Image, ScreenPosition, ImageState, Color.White);
+            }
+            else
+            {
+                Graphics2D.SpriteBatch.Draw(Graphics2D.Pixel, Bounds, BackColor);
+            }
+
+            Graphics2D.SpriteBatch.End();            
 
             base.OnPaint(e);
         }

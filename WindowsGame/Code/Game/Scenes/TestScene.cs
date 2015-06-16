@@ -1,17 +1,19 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
 
 using Faseway.GameLibrary;
 using Faseway.GameLibrary.Components;
 using Faseway.GameLibrary.Content;
+using Faseway.GameLibrary.Content.Items;
 using Faseway.GameLibrary.Game;
 using Faseway.GameLibrary.Game.Scenes;
 using Faseway.GameLibrary.Logging;
+using Faseway.GameLibrary.Serialization;
 using Faseway.GameLibrary.UI;
 using Faseway.GameLibrary.UI.Widgets;
-using Microsoft.Xna.Framework.Input;
 
 namespace Faseway.GameLibrary.TestGame.Game.Scenes
 {
@@ -37,7 +39,7 @@ namespace Faseway.GameLibrary.TestGame.Game.Scenes
         public override void LoadContent()
         {
             _container = new WidgetContainer();
-
+            
             _mainTheme = Content.Load<Song>("Audio\\Soundtrack\\MainTheme");
             MediaPlayer.Volume = 0.2f;
 
@@ -69,7 +71,7 @@ namespace Faseway.GameLibrary.TestGame.Game.Scenes
             {
                 Position = new Vector2(300, 5),
                 Size = new Vector2(100, 25),
-                Text = "Button"
+                Text = "Toggle"
             };
             btn.MouseUp += (s, e) => { _container.Get("ButtonPlayMusic").Enabled = !_container.Get("ButtonPlayMusic").Enabled; };
 
@@ -105,6 +107,46 @@ namespace Faseway.GameLibrary.TestGame.Game.Scenes
             };
             btn.Click += (s, e) => { ChangeScene(SceneManager.GetScene<WorldScene>()); };
 
+            btn = new Button(_container)
+            {
+                Position = new Vector2(520, 55),
+                Size = new Vector2(100, 25),
+                Text = "UIScript"
+            };
+            btn.Click += (s, e) => 
+            {
+                var serializer = new Serialization.UiSerializer();
+                var path = string.Format("Content\\Data\\UI\\UIS{0}.xml", this.GetType().Name.Replace("Scene", ""));
+
+                try
+                {
+                    serializer.Serialize(_container, ResourceSystem.CreateFile(path));
+                    MsgBox.Show(MsgBoxIcon.Information, "UIDocument", "UIDocument saved - {0}", path);
+                }
+                catch
+                {
+                    MsgBox.Show(MsgBoxIcon.Error, "UIDocument", "Error saving UIDocument ...");
+                }
+            };
+
+            btn = new Button(_container)
+            {
+                Position = new Vector2(520, 80),
+                Size = new Vector2(100, 25),
+                Text = "Item"
+            };
+            btn.Click += (s, e) =>
+            {
+                var item = new Item()
+                {
+                    //ItemType = 'A',
+                    //ArmType = 'B',
+                    Number = 7
+                };
+
+                MsgBox.Show(item.Name);
+            };
+            
             new DebugWindow(_container)
             {
                 Name = "DebugWindow"

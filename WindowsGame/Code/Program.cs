@@ -26,8 +26,8 @@ namespace Faseway.GameLibrary.TestGame
             {
                 game.Window.Title = "Faseway Windows Test Game";
                 //game.IsMouseVisible = true;
-                game.Graphics.PreferredBackBufferWidth = 800;
-                game.Graphics.PreferredBackBufferHeight = 600;
+                game.Graphics.PreferredBackBufferWidth = 1024;
+                game.Graphics.PreferredBackBufferHeight = 768;
                 //game.Graphics.IsFullScreen = true;
 
                 game.Run();

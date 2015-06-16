@@ -115,5 +115,27 @@ namespace Faseway.GameLibrary.Content
         }
 
         #endregion
+
+        public static FileStream CreateFile(string path)
+        {
+            if (!ExistsDirectory(path))
+            {
+                var directory = Path.GetDirectoryName(GetFullPath(path));
+                if (directory != null)
+                {
+                    CreateDirectory(directory);
+                }
+            }
+            return File.Create(path);
+        }
+
+        public static FileStream OpenFile(string path)
+        {
+            if (!File.Exists(path))
+            {
+                return null;
+            }
+            return File.OpenRead(path);
+        }
     }
 }
