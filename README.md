@@ -1,6 +1,6 @@
 ﻿# GameLibrary
 
-Open source game library for indie games.
+Open source game library for indie games. Its based on the Microsoft Xna Framework.
 
 ### Features
 
