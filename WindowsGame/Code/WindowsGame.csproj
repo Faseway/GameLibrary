@@ -108,6 +108,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Game\Scenes\Comp\PlayerStatusBar.cs" />
     <Compile Include="Game\Scenes\DummyScene.cs" />
     <Compile Include="Game\Scenes\GooeyTestScene.cs" />
     <Compile Include="Game\Scenes\TestScene.cs" />

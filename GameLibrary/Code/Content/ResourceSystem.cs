@@ -116,6 +116,13 @@ namespace Faseway.GameLibrary.Content
 
         #endregion
 
+        #region Files
+
+        /// <summary>
+        /// Creates a file in the specified path.
+        /// </summary>
+        /// <param name="path">The path and name of the file to create. </param>
+        /// <returns>A <see cref="System.FileStream"/> that provides read/write access to the file specified in path.</returns>
         public static FileStream CreateFile(string path)
         {
             if (!ExistsDirectory(path))
@@ -129,6 +136,11 @@ namespace Faseway.GameLibrary.Content
             return File.Create(path);
         }
 
+        /// <summary>
+        /// Opens an existing file for reading.
+        /// </summary>
+        /// <param name="path">The file to be opened for reading. </param>
+        /// <returns>A read-only <see cref="System.FileStream"/> on the specified path.</returns>
         public static FileStream OpenFile(string path)
         {
             if (!File.Exists(path))
@@ -137,5 +149,7 @@ namespace Faseway.GameLibrary.Content
             }
             return File.OpenRead(path);
         }
+
+        #endregion
     }
 }

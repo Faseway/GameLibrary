@@ -44,10 +44,11 @@ namespace Faseway.GameLibrary.Game.Scenes
         public override void LoadContent()
         {
             var mapDataPath = "Content\\Maps\\" + World.Map.Name;
-            if (!System.IO.File.Exists(mapDataPath + ".tga"))
+            if (System.IO.File.Exists(mapDataPath + "_mini.tga"))
             {
-                Logger.Log("Loading minimap ({0}) ...", mapDataPath);
+                // TODO
             }
+            Logger.Log("Loading minimap ({0}) ...", mapDataPath);
 
             _backgroundColor = Color.DarkSlateGray;
             _playerColor = Color.Green;
@@ -64,9 +65,6 @@ namespace Faseway.GameLibrary.Game.Scenes
 
             Vector2 offset = new Vector2(graphics.Window.ClientBounds.Width - 20 - World.Map.Bounds.Width / Factor, 20);
             Rectangle destination = new Rectangle((int)offset.X, (int)offset.Y, World.Map.Bounds.Width / Factor, World.Map.Bounds.Height / Factor);
-            Rectangle bounds = new Rectangle(0, 0, 640, 640);
-
-            //MsgBox.Show(offset);
 
             graphics.SpriteBatch.Begin();
             graphics.SpriteBatch.Draw(graphics.Pixel, destination, _backgroundColor);

@@ -70,6 +70,16 @@ namespace Faseway.GameLibrary.Game.Entities
         }
 
         /// <summary>
+        /// Returns an entity with the specified name or user data.
+        /// </summary>
+        /// <param name="name">The specified name or user data.</param>
+        /// <returns>An entity.</returns>
+        public Entity Get(string name)
+        {
+            return Entities.Find(e => e.Name == name || e.UserData == name);
+        }
+
+        /// <summary>
         /// Clears the environment.
         /// </summary>
         public void Clear()

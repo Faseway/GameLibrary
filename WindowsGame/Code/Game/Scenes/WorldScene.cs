@@ -19,6 +19,7 @@ using Faseway.GameLibrary.UI;
 using Faseway.GameLibrary.UI.Events;
 using Faseway.GameLibrary.UI.Widgets;
 using Faseway.GameLibrary.Serialization;
+using Faseway.GameLibrary.TestGame.Game.Scenes.Comp;
 
 namespace Faseway.GameLibrary.TestGame.Game.Scenes
 {
@@ -159,6 +160,8 @@ namespace Faseway.GameLibrary.TestGame.Game.Scenes
 #endregion
 
             base.Add(new MiniMap(World));
+            base.Add(new PlayerStatusBar(World));
+
             base.LoadContent();
         }
 
