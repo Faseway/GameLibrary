@@ -122,7 +122,7 @@ namespace Faseway.GameLibrary.TestGame.Game
             Cursor.Add("Sword02", new Rectangle(160, 67, 34, 37));
             Cursor.Add("Sword03", new Rectangle(160, 104, 34, 37));
 
-            Cursor.Change("Sword01");
+            Cursor.Change("Cursor01b");
 
             Seed.Components.GetAndRequire<ScriptCompiler>().Compile("Content\\Scripts\\Hello.script");
             Seed.Components.GetAndRequire<ScriptCompiler>().Compile("Content\\Scripts\\Mission\\Freeplay.script");
