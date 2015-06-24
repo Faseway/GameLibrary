@@ -31,6 +31,8 @@ namespace Faseway.GameLibrary.Scripting
             _parameters = new CompilerParameters();
             _parameters.GenerateInMemory = true;
             _parameters.ReferencedAssemblies.Add("GameLibrary.dll");
+            _parameters.ReferencedAssemblies.Add(@"C:\Program Files (x86)\Microsoft XNA\XNA Game Studio\v4.0\References\Windows\x86\Microsoft.Xna.Framework.dll");
+            _parameters.ReferencedAssemblies.Add(@"C:\Program Files (x86)\Microsoft XNA\XNA Game Studio\v4.0\References\Windows\x86\Microsoft.Xna.Framework.Game.dll");
 
             _precompiled = new List<Precompiled>();
         }
@@ -45,14 +47,19 @@ namespace Faseway.GameLibrary.Scripting
             builder.AppendLine("using Faseway.GameLibrary.Logging;");
             builder.AppendLine("using Faseway.GameLibrary.Scripting;");
             builder.AppendLine();
+            builder.AppendLine("using Microsoft.Xna.Framework;");
+            builder.AppendLine("using Microsoft.Xna.Framework.Audio;");
+            builder.AppendLine("using Microsoft.Xna.Framework.Input;");
+            builder.AppendLine("using Microsoft.Xna.Framework.Media;");
+            builder.AppendLine();
             builder.AppendLine(prepare);
             
             var result = _provider.CompileAssemblyFromSource(_parameters, builder.ToString());
             foreach (CompilerError error in result.Errors)
             {
-                Console.WriteLine("Compiler Error ({0}) : {1} on line {2} in {3}", error.ErrorNumber, error.ErrorText, error.Line, error.FileName);
+                Logger.Log("Compiler Error ({0}) : {1} on line {2} in {3}", error.ErrorNumber, error.ErrorText, error.Line, error.FileName);
             }
-            
+
             if (!result.Errors.HasErrors)
             {
                 foreach (Type type in result.CompiledAssembly.GetTypes())
@@ -70,20 +77,24 @@ namespace Faseway.GameLibrary.Scripting
                         }
                         else
                         {
-                            Console.WriteLine("Missing subclass 'Script' at {0} ({1})", type.Name, type.BaseType);
+                            Logger.Log("Missing subclass 'Script' at {0} ({1})", type.Name, type.BaseType);
                             return null;
                         }
                     }
                     else
                     {
-                        Console.WriteLine("Invalid type {0} ({1})", type.Name, type.BaseType);
+                        Logger.Log("Invalid type {0} ({1})", type.Name, type.BaseType);
                         //throw new ScriptCompileException(fileName, -1, "0", "Invalid type");
                         return null;
                     }
                 }
             }
+            else
+            {
+                MsgBox.Show(MsgBoxIcon.Error, "ScriptCompiler::Compile", "{0} error(s) occured during compile process", result.Errors.Count);
+            }
 
-            Console.WriteLine("Empty script file ({0})", path);
+            Logger.Log("Empty script file ({0})", path);
 
             return null;
         }

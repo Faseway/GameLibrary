@@ -64,7 +64,12 @@ namespace Faseway.GameLibrary.Rendering
             }
             else
             {
-                Logger.Log("Sprite {0} was not found in the sheet");
+#if DEBUG
+                MsgBox.Show(MsgBoxIcon.Warning, "SpriteSheet::Get", "Sprite {0} was not found in the sheet", name);
+#else
+                MsgBox.Show(MsgBoxIcon.Error, "SpriteSheet::Get", "Sprite {0} was not found in the sheet", name);
+                throw new KeyNotFoundException(string.Format("Sprite {0} was not found in the sheet", name));
+#endif
                 return Rectangle.Empty;
             }
         }

@@ -22,6 +22,7 @@ using Faseway.GameLibrary.UI.Widgets;
 using Faseway.GameLibrary.TestGame.Game.Scenes;
 using Faseway.GameLibrary.Rendering;
 using Faseway.GameLibrary.Serialization;
+using Faseway.GameLibrary.Scripting;
 
 namespace Faseway.GameLibrary.TestGame.Game
 {
@@ -74,6 +75,7 @@ namespace Faseway.GameLibrary.TestGame.Game
             Seed.Components.Install(new SceneManager());
             Seed.Components.Install(new GameLoop());
             Seed.Components.Install(new Cursor());
+            Seed.Components.Install(new ScriptCompiler());
             Seed.Components.Install(this);
             
             // link
@@ -121,6 +123,9 @@ namespace Faseway.GameLibrary.TestGame.Game
             Cursor.Add("Sword03", new Rectangle(160, 104, 34, 37));
 
             Cursor.Change("Sword01");
+
+            Seed.Components.GetAndRequire<ScriptCompiler>().Compile("Content\\Scripts\\Hello.script");
+            Seed.Components.GetAndRequire<ScriptCompiler>().Compile("Content\\Scripts\\Mission\\Freeplay.script");
         }
 
         /// <summary>

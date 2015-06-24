@@ -85,7 +85,16 @@ namespace Faseway.GameLibrary.Rendering
         {
             //SpriteBatch.Begin();
             SpriteBatch.Draw(Pixel, new Rectangle((int)start.X, (int)start.Y, (int)end.X, 1), color);
-            //SpriteBatch.End();
+            //SpriteBatch.End(); 
+        }
+
+        public void DrawRectangle(Rectangle rectangle, Color color)
+        {
+            var camera = Seed.Components.GetAndRequire<Camera>();
+
+            SpriteBatch.Begin(SpriteSortMode.Texture, null, null, null, null, null, camera.Transformation);
+            SpriteBatch.Draw(Pixel, rectangle, color);
+            SpriteBatch.End();
         }
     }
 }

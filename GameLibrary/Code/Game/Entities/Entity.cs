@@ -59,6 +59,13 @@ namespace Faseway.GameLibrary.Game.Entities
         {
             get { return GetComponent<RenderComponent>(); }
         }
+        /// <summary>
+        /// Gets or sets the animation.
+        /// </summary>
+        public AnimationComponent Animation
+        {
+            get { return GetComponent<AnimationComponent>(); }
+        }
 
         // Constructor
         /// <summary>
@@ -72,6 +79,7 @@ namespace Faseway.GameLibrary.Game.Entities
             Components = new List<EntityComponent>();
             AddComponent(new TransformComponent());
             AddComponent(new RenderComponent());
+            AddComponent(new AnimationComponent());
 
             Environment = environment;
             Environment.Add(this);

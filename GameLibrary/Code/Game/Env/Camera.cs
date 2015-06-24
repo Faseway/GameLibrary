@@ -96,18 +96,19 @@ namespace Faseway.GameLibrary.Game.Env
                 var matrix =
                     Matrix.CreateTranslation(new Vector3(-Position.X, -Position.Y, 0)) *
                     Matrix.CreateRotationZ(Rotation) *
-                    Matrix.CreateScale(new Vector3(Zoom, Zoom, 0))/* *
-                    Matrix.CreateTranslation(new Vector3(World.Map.Texture.Bounds.Width, World.Map.Texture.Bounds.Height, 0))*/;
+                    Matrix.CreateScale(new Vector3(Zoom, Zoom, 0)) *
+                    Matrix.CreateTranslation(new Vector3(World.Map.Texture.Bounds.Width, World.Map.Texture.Bounds.Height, 0));
                 
                 //MsgBox.Show(DisplayOffset);
-                return Matrix.CreateTranslation(DisplayOffset.X, DisplayOffset.Y, 0) * Matrix.CreateRotationZ(Rotation) * Matrix.CreateScale(1.25f);
+                //return matrix;
+                return Matrix.CreateTranslation(DisplayOffset.X, DisplayOffset.Y, 0) * Matrix.CreateRotationZ(Rotation) * Matrix.CreateScale(Zoom) * Matrix.CreateTranslation(1024 / 2 -32, 768 / 2 -32, 0);
             }
         }
 
 
         // Constants
-        public const float ZoomUpperLimit = 1.5f;
-        public const float ZoomLowerLimit = 0.5f;
+        public const float ZoomUpperLimit = 1.75f;
+        public const float ZoomLowerLimit = 0.50f;
 
         // Constructor
         /// <summary>
@@ -121,6 +122,8 @@ namespace Faseway.GameLibrary.Game.Env
 
             //Min = Vector2.Zero;
             //Max = Vector2.Zero;
+
+            Zoom = 1.25f;
 
             Position = Vector2.Zero;
 

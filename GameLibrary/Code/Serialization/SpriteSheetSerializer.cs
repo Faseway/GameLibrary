@@ -76,7 +76,52 @@ namespace Faseway.GameLibrary.Serialization
 
         public object Deserialize(Type type, Stream stream)
         {
-            throw new NotImplementedException();
+            var instance = new SpriteSheet();
+
+            var document = XDocument.Load(stream);
+
+            foreach (var element in document.Root.Descendants())
+            {
+                if (element.Name == "Sprite")
+                {
+                    var name = element.Attribute("Name").Value;
+                    var rect = Rectangle.Empty;
+
+                    rect.X = int.Parse(element.Attribute("X").Value);
+                    rect.Y = int.Parse(element.Attribute("Y").Value);
+                    rect.Width = int.Parse(element.Attribute("W").Value);
+                    rect.Height = int.Parse(element.Attribute("H").Value);
+
+                    instance.Add(name, rect);
+                }
+            }
+
+            return instance;
+        }
+
+        public void Deserialize(Stream stream, SpriteSheet spriteSheet)
+        {
+            var document = XDocument.Load(stream);
+
+            foreach (var element in document.Root.Descendants())
+            {
+                if (element.Name == "Sprite")
+                {
+                    var name = element.Attribute("Name").Value;
+                    var rect = Rectangle.Empty;
+
+                    rect.X = int.Parse(element.Attribute("X").Value);
+                    rect.Y = int.Parse(element.Attribute("Y").Value);
+                    rect.Width = int.Parse(element.Attribute("W").Value);
+                    rect.Height = int.Parse(element.Attribute("H").Value);
+
+                    spriteSheet.Add(name, rect);
+                }
+            }
+
+            stream.Flush();
+            stream.Close();
+            stream.Dispose();
         }
     }
 }

@@ -1,0 +1,35 @@
+﻿// Faseway Game Library
+// Freeplay Script v1.0
+
+public class Freeplay : MissionScript
+{
+	// Properties
+	public Song MainTheme { get; private set; }
+
+	// Constructor
+	public Freeplay()
+	{
+		
+	}
+
+	// Methods
+	public override void Start()
+	{
+		Logger.Log("Freeplay mission start");
+
+		MainTheme = Content.Load<Song>("Audio\\Soundtrack\\MainTheme");
+		
+		MediaPlayer.Volume = 0.2f;
+		MediaPlayer.Play(MainTheme);
+	}
+
+	public void OnTick()
+	{
+
+	}
+
+	public void OnTrigger()
+	{
+
+	}
+}

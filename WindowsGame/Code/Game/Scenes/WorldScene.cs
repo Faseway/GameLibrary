@@ -18,6 +18,7 @@ using Faseway.GameLibrary.Scripting;
 using Faseway.GameLibrary.UI;
 using Faseway.GameLibrary.UI.Events;
 using Faseway.GameLibrary.UI.Widgets;
+using Faseway.GameLibrary.Serialization;
 
 namespace Faseway.GameLibrary.TestGame.Game.Scenes
 {
@@ -28,6 +29,7 @@ namespace Faseway.GameLibrary.TestGame.Game.Scenes
         private Button _button;
         private Button _buttonMenu;
         private Label _debugText;
+        private Box _box;
 
         // Properties
         protected World World { get; set; }
@@ -47,6 +49,13 @@ namespace Faseway.GameLibrary.TestGame.Game.Scenes
         public override void LoadContent()
         {
             #region Load UI
+
+            _box = new Box(WidgetContainer)
+            {
+                Size = new Vector2(100, 300),
+                Color = Color.DarkGray,
+                Visible = false
+            };
 
             _button = new Button(WidgetContainer)
             {
@@ -74,14 +83,22 @@ namespace Faseway.GameLibrary.TestGame.Game.Scenes
 
             #region Load World
 
+            var serializer = new SpriteSheetSerializer();
+
             World = new World();
             World.Camera.Max = World.Map.Size;
 
             Player = World.Environment.Factory.Create();
             Player.Name = "Test Player";
+            Player.UserData = "Player";
             Player.Transform.Position = new Vector2(125, 225);
-            Player.Rendering.SpriteSheet.Texture = Content.Load<Texture2D>("Textures\\Objects");
-            Player.Rendering.SpriteSheet.Add("Entity", new Rectangle(128, 0, 64, 64));
+            Player.Rendering.SpriteSheet.Texture = Content.Load<Texture2D>("Textures\\Player");
+            Player.Rendering.SpriteSheet.Add("Entity", new Rectangle(0, 0, 64, 64));
+            serializer.Deserialize(ResourceSystem.OpenFile("Content\\Textures\\Player.xml"), Player.Rendering.SpriteSheet);
+            Player.Animation.Animations.Add("PlayerDownIdle");
+            Player.Animation.Animations.Add("PlayerUpIdle");
+            Player.Animation.Animations.Add("PlayerLeftIdle");
+            Player.Animation.Animations.Add("PlayerRightIdle");
 
             World.Camera.Target = Player;
 
@@ -90,10 +107,58 @@ namespace Faseway.GameLibrary.TestGame.Game.Scenes
             house.Rendering.SpriteSheet.Texture = Content.Load<Texture2D>("Textures\\Objects");
             house.Rendering.SpriteSheet.Add("Entity", new Rectangle(320, 0, 100, 100));
 
+            house = World.Environment.Factory.Create();
+            house.Transform.Position = new Vector2(300, 280);
+            house.Rendering.SpriteSheet.Texture = Content.Load<Texture2D>("Textures\\Objects");
+            house.Rendering.SpriteSheet.Add("Entity", new Rectangle(320, 0, 100, 100));
+
+            house = World.Environment.Factory.Create();
+            house.Transform.Position = new Vector2(500, 200);
+            house.Rendering.SpriteSheet.Texture = Content.Load<Texture2D>("Textures\\Objects");
+            house.Rendering.SpriteSheet.Add("Entity", new Rectangle(0, 200, 260, 185));
+
+            var tree = World.Environment.Factory.Create();
+            tree.Transform.Position = new Vector2(320, 64);
+            tree.Rendering.SpriteSheet.Texture = Content.Load<Texture2D>("Textures\\Objects");
+            tree.Rendering.SpriteSheet.Add("Entity", new Rectangle(139, 0, 40, 64));
+
+            tree = World.Environment.Factory.Create();
+            tree.Transform.Position = new Vector2(352, 96);
+            tree.Rendering.SpriteSheet.Texture = Content.Load<Texture2D>("Textures\\Objects");
+            tree.Rendering.SpriteSheet.Add("Entity", new Rectangle(139, 0, 40, 64));
+
+            tree = World.Environment.Factory.Create();
+            tree.Transform.Position = new Vector2(384, 128);
+            tree.Rendering.SpriteSheet.Texture = Content.Load<Texture2D>("Textures\\Objects");
+            tree.Rendering.SpriteSheet.Add("Entity", new Rectangle(139, 0, 40, 64));
+
             Controller = new EntityController(Player);
 
             #endregion
 
+            #region Load Script
+
+            try
+            {
+                //var script = Seed.Components.GetAndRequire<ScriptCompiler>().GetCompiled("Freeplay").ConvertTo<MissionScript>();
+                //script.Start();
+            }
+            catch (System.IO.FileNotFoundException ex)
+            {
+                MsgBox.Show(MsgBoxIcon.Error, "World::LoadContent", "{0} - {1}", ex.Message, ex.FileName);
+                Seed.Components.Get<TestGame>().Exit();
+                return;
+            }
+            catch (System.Exception ex)
+            {
+                MsgBox.Show(MsgBoxIcon.Error, "World::LoadContent", "Unhandled exception of type {0} occured:\n{1}\n{2}", ex.GetType().Name, ex.Message, ex.StackTrace);
+                //Seed.Components.Get<TestGame>().Exit();
+                //return;
+            }
+
+#endregion
+
+            base.Add(new MiniMap(World));
             base.LoadContent();
         }
 
@@ -109,23 +174,50 @@ namespace Faseway.GameLibrary.TestGame.Game.Scenes
 
         public override void Update(GameTime gameTime)
         {
+            if (Keyboard.IsKeyDown(Keys.Add))
+            {
+                World.Camera.Zoom += 0.01f;
+            }
+            else if (Keyboard.IsKeyDown(Keys.Subtract))
+            {
+                World.Camera.Zoom -= 0.01f;
+            }
+            if (Keyboard.IsKeyDown(Keys.NumPad8))
+            {
+                EntityController.ShowDebugHelper = !EntityController.ShowDebugHelper;
+            }
+            
             Controller.Update(gameTime);
 
             World.Update(gameTime);
 
             _debugText.Text = string.Format
             (
-                "Environment\nCount: {0}\n\nTest Player\nName: {1}\nPosition: {2}",
+                "Environment\nEntityCount: {0}\n\nTest Player\nName: {1}\nPosition: {2}\nCamera Zoom: {3}",
                 World.Environment.EntityCount,
                 Player.Name,
-                Player.Transform.Position
+                Player.Transform.Position,
+                World.Camera.Zoom
             );
+
+            if (Mouse.RightButton == ButtonState.Pressed)
+            {
+                var entityRect = new Rectangle((int)Controller.CurrentPosition.X, (int)Controller.CurrentPosition.Y, 64, 64);
+                if (entityRect.Contains(Mouse.X, Mouse.Y))
+                {
+                    _box.Position = Controller.CurrentPosition;
+                    _box.ToggleVisibility();
+                    //MsgBox.Show("yo");
+                }
+            }
 
             base.Update(gameTime);
         }
 
         public override void Draw(GameTime gameTime)
         {
+            Graphics.Clear(Color.Black);
+
             World.Draw(gameTime);
 
             base.Draw(gameTime);
