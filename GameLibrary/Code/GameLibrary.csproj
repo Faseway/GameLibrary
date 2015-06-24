@@ -54,12 +54,14 @@
     <Compile Include="Game\Campaigns\ObjectiveChangedEventArgs.cs" />
     <Compile Include="Game\Entities\Components\AnimationComponent.cs" />
     <Compile Include="Game\Entities\Components\EntityComponent.cs" />
+    <Compile Include="Game\Entities\Components\HealthComponent.cs" />
     <Compile Include="Game\Entities\Components\RenderComponent.cs" />
     <Compile Include="Game\Entities\Components\TransformComponent.cs" />
     <Compile Include="Game\Entities\Entity.cs" />
     <Compile Include="Game\Entities\EntityController.cs" />
     <Compile Include="Game\Entities\EntityEnvironment.cs" />
     <Compile Include="Game\Entities\EntityFactory.cs" />
+    <Compile Include="Game\Entities\Person.cs" />
     <Compile Include="Game\Env\Camera.cs" />
     <Compile Include="Game\Env\Map.cs" />
     <Compile Include="Game\Env\Weather.cs" />
@@ -148,6 +150,7 @@
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Game\Entities\Events\" />
     <Folder Include="Math\" />
   </ItemGroup>
   <ItemGroup>

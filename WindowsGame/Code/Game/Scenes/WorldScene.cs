@@ -89,7 +89,7 @@ namespace Faseway.GameLibrary.TestGame.Game.Scenes
             World = new World();
             World.Camera.Max = World.Map.Size;
 
-            Player = World.Environment.Factory.Create();
+            Player = World.Environment.Factory.CreatePerson();
             Player.Name = "Test Player";
             Player.UserData = "Player";
             Player.Transform.Position = new Vector2(125, 225);

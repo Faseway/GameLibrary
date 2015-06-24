@@ -39,5 +39,14 @@ namespace Faseway.GameLibrary.Game.Entities
         {
             return new Entity(Environment);
         }
+
+        /// <summary>
+        /// Creates a person.
+        /// </summary>
+        /// <returns></returns>
+        public Person CreatePerson()
+        {
+            return new Person(Environment);
+        }
     }
 }
